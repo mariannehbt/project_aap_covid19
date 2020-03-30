@@ -26,6 +26,24 @@ ActiveRecord::Schema.define(version: 2020_03_30_204819) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "cmps", force: :cascade do |t|
+    t.string "adress"
+    t.string "zipcode"
+    t.string "phonenumber"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "q1"
+    t.integer "q2"
+    t.integer "q3"
+    t.integer "depression_score"
+    t.integer "total_score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
