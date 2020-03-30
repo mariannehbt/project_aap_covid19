@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :surveys
   
-  validates :username,
-	presence: true
+ #  validates :username,
+	# presence: true
 end
