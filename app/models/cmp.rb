@@ -1,0 +1,2 @@
+class Cmp < ApplicationRecord
+end
