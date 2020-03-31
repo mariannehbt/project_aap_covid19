@@ -1,25 +1,84 @@
-<ul>
-  <% if user_signed_in? %>
-    <li>
-      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-    </li>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script>
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
+    </head>
+    <body>
+        <!-- //header -->
+        <header class="py-3">
+            <div class="container">
+                    <div id="logo">
+                        <h1> <a href="index.html"><span class="fa fa-stethoscope" aria-hidden="true"></span> Dental Health</a></h1>
+                    </div>
+                <!-- nav -->
+                <nav class="d-lg-flex">
 
-    <li>
-      Email : <%= current_user.email %>
-    </li>
+                    <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
+                    <input type="checkbox" id="drop" />
+                    <ul class="menu mt-2 ml-auto">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li class=""><a href="about.html">About Us</a></li>
+                        <li class=""><a href="services.html">Services</a></li>
+                        <li class=""><a href="gallery.html">Gallery</a></li>
+                        <li class=""><a href="blog.html">Blog</a></li>
+                        <li class=""><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                    <div class="login-icon ml-2">
+                        <a class="user" href="contact.html"> Book Now</a>
+                    </div>
+                </nav>
+                <div class="clear"></div>
+                <!-- //nav -->
+            </div>
+        </header>
+        <!-- //header -->
 
-    <li>
-      <%= link_to "Edit email / password", edit_user_registration_path %>
-    </li>
+        <!-- page content -->
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <% if user_signed_in? %>
+            <ul>
+                <li>
+                    <%= link_to "Mon Profil (modifier)", edit_user_registration_path, :class =>'user' %>
+                </li>
+                <li>
+                    <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class =>'user' %>
+                </li>
+            </ul>
+        <% else %>
+            <%= link_to "Connexion", new_user_session_path, :class =>'user' %>
+        <% end %>
+        <!-- // page content -->
 
-  <% else %>
-    <li>    
-      <%= link_to "Sign in", new_user_session_path %>
-    </li>
-
-    <li>
-      <%= link_to "Sign up", new_user_registration_path %>
-    </li>
-
-  <% end %>
-</ul>
+        <!-- copyright -->
+        <div class="copyright">
+            <div class="container py-4">
+                <div class=" text-center">
+                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a> </p>
+                </div>
+            </div>
+        </div>
+        <!-- //copyright -->
+                
+        <!-- move top -->
+        <div class="move-top text-right">
+            <a href="#home" class="move-top"> 
+                <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- move top -->
+    </body>
+</html>

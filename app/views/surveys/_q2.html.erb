@@ -1,0 +1,5 @@
+<h2>Question 2</h2>
+<p>
+	<%= f.label :q2, "Je me fais du souci" %>
+	<%= f.select :q2, options_for_select([["Très souvent", 3], ["Assez souvent", 2], ["Occasionnellement", 1], ["Très occasionnellement", 0]], session[:survey_params]["q2"]), class:"form-control" %>
+</p>

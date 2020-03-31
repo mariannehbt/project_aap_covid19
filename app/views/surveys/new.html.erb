@@ -1,0 +1,14 @@
+<h1>Surveys#new</h1>
+
+<%= form_with model: @survey, url: surveys_path, local: true, class: "form-group", :validate => true do |f| %>
+
+<%= render "#{@survey.current_question}", :f => f %>
+
+<p><%= f.submit "Suivant" %></p>
+<p><%= f.submit "Précédent", :name => "back_button" unless @survey.first_question? %></p>
+
+
+<% end %>
+
+
+
