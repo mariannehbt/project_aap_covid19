@@ -8,8 +8,16 @@
 
 			<%= render "#{@survey.current_question}", :f => f %>
 
-			<p><%= f.submit "Suivant", class: "btn btn-banner my-sm-3 mb-3" %></p>
-			<p><%= f.submit "Précédent", class: "btn btn-banner my-sm-3 mb-3", :name => "back_button" unless @survey.first_question? %></p>
+			<div class="row">
+				<div class="col-xs">
+
+					<p><%= f.submit "Précédent", class: "btn btn-banner1 my-sm-3 mb-3", :name => "back_button" unless @survey.first_question? %></p>
+
+				</div>
+				<div class="col-xs">
+					<p><%= f.submit "Suivant", class: "btn btn-banner my-sm-3 mb-3" %></p>
+				</div>
+			</div>
 
 
 			<% end %>

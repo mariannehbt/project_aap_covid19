@@ -1,31 +1,41 @@
-<h1>Surveys#edit</h1>
+<div class="container py-md-3">
+	<h2 class="heading text-center mb-sm-5 mb-4">Confirmation</h2>
+	<div class="row">
+		<div class="col-lg-8">
 
-<%= form_with model: @survey, url: survey_path, local: true, class: "form-group", :validate => true do |f| %>
+			<br>
+			<%= form_with model: @survey, url: survey_path, local: true, class: "form-group", :validate => true do |f| %>
 
-<h2>Question 1</h2>
-<p> 
-	<%= f.label :q1, "Je ris facilement" %>
-	<%= f.select :q1, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q1), class:"form-control" %>
-</p>
+			<h2>Question 1</h2>
+			<p> 
+				<%= f.label :q1, "Je ris facilement" %>
+				<%= f.select :q1, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q1), class:"form-control" %>
+			</p>
+			<br>
 
-
-<h2>Question 2</h2>
-<p>
-	<%= f.label :q2, "Je me fais du souci" %>
-	<%= f.select :q2, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q2), class:"form-control" %>
-</p>
-
-
-<h2>Question 3</h2>
-<p> 
-	<%= f.label :q3, "Je suis de bonne humeur" %>
-	<%= f.select :q3, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q3), class:"form-control" %>
-</p>
+			<h2>Question 2</h2>
+			<p>
+				<%= f.label :q2, "Je me fais du souci" %>
+				<%= f.select :q2, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q2), class:"form-control" %>
+			</p>
+			<br>
 
 
-<p><%= f.submit "Confirmer" %></p>
+			<h2>Question 3</h2>
+			<p> 
+				<%= f.label :q3, "Je suis de bonne humeur" %>
+				<%= f.select :q3, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q3), class:"form-control" %>
+			</p>
+			<br>
+			<br>
 
-<% end %>
+			<p><%= f.submit "Confirmer", class: "btn btn-banner my-sm-3 mb-3" %></p>
+
+			<% end %>
+
+		</div>
+	</div>
+</div>
 
 
 
