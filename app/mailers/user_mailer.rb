@@ -1,9 +1,9 @@
 class UserMailer < ApplicationMailer
-	default from: 'no-reply@monsite.fr'
+	default from: 'covipsy19@gmail.com'
 
 	def welcome_email(user)
 		@user = user
-		@url  = 'http://monsite.fr/login'
-		mail(to: @user.email, subject: 'Bienvenue chez nous !')
+		@url  = 'https://project-aap-covid19.herokuapp.com/users/sign_in'
+		mail(to: @user.email, subject: 'Bienvenue sur Covipsy19 !')
 	end
 end
