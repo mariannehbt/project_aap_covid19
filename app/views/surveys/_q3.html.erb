@@ -1,0 +1,5 @@
+<h2>Question 3</h2>
+  <p> 
+  		<%= f.label :q3 %>
+			<%= f.select :q3, options_for_select(%w(1 2 3 4 5).collect{ |t| [t, t] }, session[:survey_params]["q3"]), class:"form-control" %>
+  </p>
