@@ -18,7 +18,6 @@ class SurveysController < ApplicationController
   		@survey.previous_question
   	elsif @survey.last_question?
   		@survey.save
-  		
   	else
   		@survey.next_question
   	end
@@ -27,18 +26,40 @@ class SurveysController < ApplicationController
   		render "new"
   	else
   		session[:survey_question] = session[:survey_params] = nil
-  		flash[:notice] = "Questionnaire enregistré"
-  		redirect_to @survey
+  		flash[:notice] = "Merci de confirmer vos réponses."
+  		redirect_to edit_survey_path(@survey)
   	end
   end
 
   def edit
+    @survey = Survey.find(params[:id])
   end
 
+  def update
+    @survey = Survey.find(params[:id])
+    if @survey.update(params[:survey].permit!)
+      @survey.update(depression_score: depression_score)
+      flash[:notice] = "Votre questionnaire a bien été enregistré."
+      redirect_to @survey
+    else
+      render "edit"
+    end
+  end
+
+
   def show
+    @survey = Survey.find(params[:id])
   end
 
   def index
   end 
+
+
+  private 
+
+  def depression_score
+    @survey = Survey.find(params[:id])
+    return @survey.q1 + @survey.q2 + @survey.q3
+  end
 
 end

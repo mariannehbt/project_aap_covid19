@@ -1,2 +1,31 @@
 <h1>Surveys#edit</h1>
-<p>Find me in app/views/surveys/edit.html.erb</p>
+
+<%= form_with model: @survey, url: survey_path, local: true, class: "form-group", :validate => true do |f| %>
+
+<h2>Question 1</h2>
+<p> 
+	<%= f.label :q1, "Je ris facilement" %>
+	<%= f.select :q1, options_for_select([["Très souvent", 3], ["Assez souvent", 2], ["Occasionnellement", 1], ["Très occasionnellement", 0]], @survey.q1), class:"form-control" %>
+</p>
+
+
+<h2>Question 2</h2>
+<p>
+	<%= f.label :q2, "Je me fais du souci" %>
+	<%= f.select :q2, options_for_select([["Très souvent", 3], ["Assez souvent", 2], ["Occasionnellement", 1], ["Très occasionnellement", 0]], @survey.q2), class:"form-control" %>
+</p>
+
+
+<h2>Question 3</h2>
+<p> 
+	<%= f.label :q3, "Je suis de bonne humeur" %>
+	<%= f.select :q3, options_for_select([["Très souvent", 3], ["Assez souvent", 2], ["Occasionnellement", 1], ["Très occasionnellement", 0]], @survey.q3), class:"form-control" %>
+</p>
+
+
+<p><%= f.submit "Confirmer" %></p>
+
+<% end %>
+
+
+
