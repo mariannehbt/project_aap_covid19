@@ -1,3 +1,18 @@
-<h1>Surveys#show</h1>
-<p>Votre questionnaire a bien été enregistré. Votre score est de <%=@survey.depression_score%>.</p>
+<div class="container py-md-3">
+	<h2 class="heading text-center mb-sm-5 mb-4">Résultats</h2>
+	<div class="row">
+		<div class="col-lg-8">
 
+
+			<h4>Votre score est de <%=@survey.depression_score%>.</h4>
+			<br>
+			<br>
+
+			<h4>Inscrivez-vous pour bénéficier d'un suivi par email :</h4>
+			<br>
+			<%= render "sign_up" %>
+
+
+		</div>
+	</div>
+</div>
