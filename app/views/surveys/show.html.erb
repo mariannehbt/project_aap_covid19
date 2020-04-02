@@ -3,7 +3,6 @@
 	<div class="row">
 		<div class="col-lg-8">
 
-
 			<h4>Votre score est de <%=@survey.depression_score%>.</h4>
 			<br>
 			<br>
@@ -13,17 +12,17 @@
 			<br>
 
 			<div class="col-xs">
-					<p><%= link_to "Mon espace personnel", user_path(current_user),  class: "btn btn-banner my-sm-3 mb-3" %></p>
-				</div>
+				<p><%= link_to "Mon espace personnel", user_path(current_user),  class: "btn btn-banner my-sm-3 mb-3" %></p>
 			</div>
-
-
-			<%else%>
-			<h4>Inscrivez-vous pour bénéficier d'un suivi par email :</h4>
-			<br>
-			<%= render "sign_up" %>
-			<%end%>
-
 		</div>
+
+
+		<%else%>
+		<h4>Inscrivez-vous pour bénéficier d'un suivi par email :</h4>
+		<br>
+		<%= render "sign_up" %>
+		<%end%>
+
 	</div>
+</div>
 </div>
