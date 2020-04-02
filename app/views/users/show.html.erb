@@ -7,8 +7,12 @@
 			<h4>L'évolution de votre score :</h4>
 			<br>
 
-			<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score) %>
+			<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").sum(:depression_score), min: 0, max: 10 %>
 			
+			<% if User.find(current_user.id).surveys.last.created_at.day === Date.today.day %>
+				<% User.find(current_user.id).surveys.last.delete %>
+			<% end %>
+
 			<br>
 
 			<h4>Pour vous évaluer à nouveau : </h4>
@@ -18,9 +22,6 @@
 					<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn btn-banner my-sm-3 mb-3" %></p>
 				</div>
 			</div>
-
-
-
 		</div>
 	</div>
 </div>
