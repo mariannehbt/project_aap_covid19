@@ -54,7 +54,13 @@ class SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
-    @cmps = Cmp.all
+    if params[:search] && params[:search] != ''
+      @cmps = Cmp.near(params[:search], 150, units: :km, :order => :distance)
+      results = Geocoder.search(params[:search])
+      @coord = results.first.coordinates
+    else
+      @cmps = Cmp.all
+    end
   end
 
   def index

@@ -77,3 +77,5 @@ gem "chartkick", "~> 3.3"
 gem "groupdate", "~> 5.0"
 
 gem "geocoder", "~> 1.6"
+
+gem "jquery-rails", "~> 4.3"
