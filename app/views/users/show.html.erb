@@ -1,0 +1,26 @@
+<div class="container py-md-3">
+	<h2 class="heading text-center mb-sm-5 mb-4">Bienvenue <%=@user.username%></h2>
+	<div class="row">
+		<div class="col-lg-8">
+
+
+			<h4>L'évolution de votre score :</h4>
+			<br>
+
+			<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score) %>
+			
+			<br>
+
+			<h4>Pour vous évaluer à nouveau : </h4>
+			<br>
+
+			<div class="col-xs">
+					<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn btn-banner my-sm-3 mb-3" %></p>
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+</div>

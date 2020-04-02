@@ -17,7 +17,12 @@ class SurveysController < ApplicationController
   	if params[:back_button]
   		@survey.previous_question
   	elsif @survey.last_question?
-  		@survey.save
+      if user_signed_in?
+        @survey.user = current_user
+        @survey.save
+      else
+  	   	@survey.save
+      end
   	else
   		@survey.next_question
   	end
