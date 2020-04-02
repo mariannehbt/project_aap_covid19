@@ -8,10 +8,21 @@
 			<br>
 			<br>
 
+			<% if user_signed_in?%>
+			<h4>Accédez à votre espace personnel pour retrouvez vos résultats :</h4>
+			<br>
+
+			<div class="col-xs">
+					<p><%= link_to "Mon espace personnel", user_path(current_user),  class: "btn btn-banner my-sm-3 mb-3" %></p>
+				</div>
+			</div>
+
+
+			<%else%>
 			<h4>Inscrivez-vous pour bénéficier d'un suivi par email :</h4>
 			<br>
 			<%= render "sign_up" %>
-
+			<%end%>
 
 		</div>
 	</div>
