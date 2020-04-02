@@ -1,28 +1,9 @@
-<div class="container py-md-3">
-	<h2 class="heading text-center mb-sm-5 mb-4">Questionnaire</h2>
-	<div class="row">
-		<div class="col-lg-8">
+<%= form_with model: @survey, url: surveys_path, local: true, class: "form-group", :validate => true do |f| %>
+  <%= render "#{@survey.current_question}", :f => f %>
 
+  <div id="bottom-wizard">
+    <%= f.submit "Précédent", class: "backward", :name => "back_button" unless @survey.first_question? %>
+    <%= f.submit "Suivant", class: "forward" %>
+  </div>
 
-			<%= form_with model: @survey, url: surveys_path, local: true, class: "form-group", :validate => true do |f| %>
-
-			<%= render "#{@survey.current_question}", :f => f %>
-
-			<div class="row">
-				<div class="col-xs">
-
-					<p><%= f.submit "Précédent", class: "btn btn-banner1 my-sm-3 mb-3", :name => "back_button" unless @survey.first_question? %></p>
-
-				</div>
-				<div class="col-xs">
-					<p><%= f.submit "Suivant", class: "btn btn-banner my-sm-3 mb-3" %></p>
-				</div>
-			</div>
-
-
-			<% end %>
-
-		</div>
-	</div>
-</div>
-
+<% end %>

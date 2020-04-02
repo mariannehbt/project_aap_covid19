@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>ProjectAapCovid19</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container-fluid full-height">
+      <div class="row row-height">
+        <div class="col-lg-6 content-left">
+          <div class="content-left-wrapper">
+            <a href="index.html" id="logo"><img src="img/logo.png" alt="" width="49" height="35"></a>
+            <div id="social">
+              <ul>
+                <li><a href="#0"><i class="icon-facebook"></i></a></li>
+                <li><a href="#0"><i class="icon-twitter"></i></a></li>
+                <li><a href="#0"><i class="icon-google"></i></a></li>
+                <li><a href="#0"><i class="icon-linkedin"></i></a></li>
+              </ul>
+            </div>
+            <!-- /social -->
+            <div>
+              <figure><%= image_tag 'survey-img.jpg', class: "img-fluid" %></figure>
+              
+              <h2>Questionnaire Evapsy</h2>
+              <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel. Adhuc invidunt duo ex. Eu tantas dolorum ullamcorper qui.</p>
+              <a href="#0" class="btn_1 rounded">Démarrer un suivi</a>
+              <a href="#start" class="btn_1 rounded mobile_btn">Démarrer un suivi</a>
+            </div>
+            <div class="copy">© 2020 Evapsy</div>
+          </div>
+          <!-- /content-left-wrapper -->
+        </div>
+        <!-- /content-left -->
+
+        <div class="col-lg-6 content-right" id="start">
+          <div id="wizard_container">
+            <div id="top-wizard">
+              <div id="progressbar"></div>
+            </div>
+            <div id="wrapped">
+              <div id="middle-wizard">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
