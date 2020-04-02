@@ -6,6 +6,9 @@
 
 			<h4>L'évolution de votre score :</h4>
 			<br>
+
+			<%= line_chart current_user.surveys.group_by_day(:created_at).maximum(:depression_score) %>
+			
 			<br>
 
 			<h4>Pour vous évaluer à nouveau : </h4>
