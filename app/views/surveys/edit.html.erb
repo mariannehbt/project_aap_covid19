@@ -1,41 +1,48 @@
-<div class="container py-md-3">
-	<h2 class="heading text-center mb-sm-5 mb-4">Confirmation</h2>
-	<div class="row">
-		<div class="col-lg-8">
-
-			<br>
-			<%= form_with model: @survey, url: survey_path, local: true, class: "form-group", :validate => true do |f| %>
-
-			<h2>Question 1</h2>
-			<p> 
-				<%= f.label :q1, "Je ris facilement" %>
-				<%= f.select :q1, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q1), class:"form-control" %>
-			</p>
-			<br>
-
-			<h2>Question 2</h2>
-			<p>
-				<%= f.label :q2, "Je me fais du souci" %>
-				<%= f.select :q2, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q2), class:"form-control" %>
-			</p>
-			<br>
+<div class="submit step">
+  <h3 class="main_question"><strong>5/5</strong>Summary</h3>
+  <div class="summary">
 
 
-			<h2>Question 3</h2>
-			<p> 
-				<%= f.label :q3, "Je suis de bonne humeur" %>
-				<%= f.select :q3, options_for_select([["Très souvent", 0], ["Assez souvent", 1], ["Rarement", 2], ["Très rarement", 3]], @survey.q3), class:"form-control" %>
-			</p>
-			<br>
-			<br>
+    <%= form_with model: @survey, url: survey_path, local: true, class: "form-group", :validate => true do |f| %>
 
-			<p><%= f.submit "Confirmer", class: "btn btn-banner my-sm-3 mb-3" %></p>
-
-			<% end %>
-
-		</div>
-	</div>
+      <ul>
+        <li><strong>1</strong>
+          <h5>Je ris facilement</h5>
+          <%= hidden_field_tag 'survey[q1]', @survey.q1  %>
+          <p>
+            <%= "Très souvent" if @survey.q1 == 0 %>
+            <%= "Assez souvent" if @survey.q1 == 1 %>
+            <%= "Rarement" if @survey.q1 == 2 %>
+            <%= "Très rarement" if @survey.q1 == 3 %>
+          </p>
+        </li>
+        <li><strong>2</strong>
+          <h5>Je me fais du souci</h5>
+          <%= hidden_field_tag 'survey[q2]', @survey.q2  %>
+          <p>
+            <%= "Très souvent" if @survey.q2 == 0 %>
+            <%= "Assez souvent" if @survey.q2 == 1 %>
+            <%= "Rarement" if @survey.q2 == 2 %>
+            <%= "Très rarement" if @survey.q2 == 3 %>
+          </p>
+        </li>
+        <li><strong>3</strong>
+          <h5>Je suis de bonne humeur</h5>
+          <%= hidden_field_tag 'survey[q3]', @survey.q3  %>
+          <p>
+            <%= "Très souvent" if @survey.q3 == 0 %>
+            <%= "Assez souvent" if @survey.q3 == 1 %>
+            <%= "Rarement" if @survey.q3 == 2 %>
+            <%= "Très rarement" if @survey.q3 == 3 %>
+          </p>
+          <p id="additional_message"></p>
+        </li>
+      </ul>
+      <div id="bottom-wizard">
+        <%= f.submit "Confirmer", name: "process", class: "submit" %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
 
 
