@@ -54,6 +54,7 @@ class SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
+    @cmps = Cmp.all
   end
 
   def index

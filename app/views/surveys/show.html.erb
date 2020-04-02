@@ -7,6 +7,15 @@
 			<br>
 			<br>
 
+			<h4>Les C.M.P. près de chez vous :</h4>
+
+
+			<div id="mapid"></div>
+
+			<br>
+			<br>
+
+
 			<% if user_signed_in?%>
 			<h4>Accédez à votre espace personnel pour retrouvez vos résultats :</h4>
 			<br>
@@ -26,3 +35,62 @@
 	</div>
 </div>
 </div>
+
+
+
+
+<!-- Javascript for OpenStreetMap -->
+			<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+			integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+			crossorigin=""></script>
+
+<script type="text/javascript">var mymap = L.map('mapid').setView([48.8534, 2.3488], 10);
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    minZoom: 1,
+    maxZoom: 20,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiZW1pbGllZW1zIiwiYSI6ImNrOGphOWdybTA2cnEzcW10OWxsdGQ2eTEifQ.5z_HnBHR8G75v2ezKwg2Iw'
+}).addTo(mymap);
+</script>
+
+
+
+<!-- 
+<script type="text/javascript">
+      // Initialization of map center
+      var lat = 30;
+      var lon = 70;
+      var mymap = null;
+			// Initialization of latitude and longitude for each cmp
+			var cmps = {<%Cmp.all.each do |cmp|%>
+				<%=cmp.name%>: { "lat": <%=cmp.latitude%>, "lon": <%=cmp.longitude%> },
+				<%end%>
+			};
+			// Initialization of the map
+			function initMap() {
+				// Creation of "mymap" object to insert it in HTML element with id="map"
+				mymap = L.map('map-index').setView([lat, lon], 2.3);
+				// Serveur location indication for Leaflet 
+				L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+					// Link to data sources 
+					attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
+					minZoom: 1,
+					maxZoom: 20
+				}).addTo(mymap);
+				 
+				// Loop in the member list for the marker
+				for (cmp in cmps) {
+					var marker = L.marker([cmps[cmp].lat, cmps[cmp].lon]).addTo(mymap);
+					// Popup with name of each member 
+					marker.bindPopup(cmp);
+				}               	
+			}
+        window.onload = function(){
+// Init function is running when DOM is loaded
+initMap(); 
+};
+</script>
+-->
