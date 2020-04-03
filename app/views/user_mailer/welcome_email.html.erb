@@ -6,15 +6,15 @@
     <body>
         <h1>Bonjour <%= @user.username %>,</h1>
         <p>
-            Tu t'es inscrit sur Covipsy19 en utilisant l'e-mail suivant : <%= @user.email %>.
+            Vous vous êtes inscrit(e) sur Covipsy19, un site d'évaluation, de suivi et de conseil en santé mentale, pendant et suite au confinement imposé par le Covid 19.
+         </p>
+         <p>
+            Pour consulter les résultats de vos précédents tests, connectez-vous sur <a href="https://project-aap-covid19.herokuapp.com">Covipsy19</a> en utilisant comme identifiant votre e-mail : <%= @user.email %>.
         </p>
         <p>
-            Pour accéder à ton espace, connecte-toi en cliquant sur 
-                <a href= <%= @url %> >ce lien</a>
-                .
-        </p>
-        <p>
-            À très vite sur Covipsy19 !
+            Conformément à votre choix, vous serez invité(e) par mail à refaire une évaluation tous les <%= @user.mailing_frequency %> jours.
+            <br>
+            Vous pouvez changer à tout moment la fréquence de ces évaluations en vous rendant dans la rubrique "Mon Profil" de votre espace personnel.
         </p>
     </body>
 </html>
