@@ -8,6 +8,7 @@ class SurveysController < ApplicationController
   	session[:survey_params] ||= {}
   	@survey = Survey.new(session[:survey_params])
   	@survey.current_question = session[:survey_question]
+    delete_survey_of_today
   end
 
   def create 
@@ -72,6 +73,15 @@ class SurveysController < ApplicationController
   def depression_score
     @survey = Survey.find(params[:id])
     return @survey.q1 + @survey.q2 + @survey.q3
+  end
+
+  def delete_survey_of_today
+    if user_signed_in? && current_user.surveys.last 
+      if current_user.surveys.last.created_at.strftime("%d/%m/%y") == Date.today.strftime("%d/%m/%y") 
+        #delete the survey of today if user wants to take another one on same day
+        current_user.surveys.last.delete
+      end
+    end
   end
 
 end
