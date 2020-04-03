@@ -13,9 +13,10 @@
 
 			<h4>Pour vous évaluer à nouveau : </h4>
 			<br>
-
-			<div class="col-xs">
-					<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn btn-banner my-sm-3 mb-3" %></p>
+			<div class="container">
+				<div class="row col-xs">
+					<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1 rounded my-sm-3 mb-3" %></p>
+					<p><%= link_to 'Se déconnecter', destroy_user_session_path, class: "btn_1 rounded my-sm-3 mb-3" %></p>
 				</div>
 			</div>
 
