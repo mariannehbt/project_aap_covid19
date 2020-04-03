@@ -1,27 +1,65 @@
 <div class="container py-md-3">
-	<h2 class="heading text-center mb-sm-5 mb-4">Bienvenue <%=@user.username%></h2>
+	<h2 class="heading text-center mb-sm-5 mb-4">Bienvenue dans votre espace personnel, <%=@user.username%>.</h2>
 	<div class="row">
 		<div class="col-lg-8">
 
 
-			<h4>L'évolution de votre score :</h4>
+			<h4>L'évolution de mon score :</h4>
 			<br>
 
-			<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score) %>
+			<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score), ytitle: "Score obtenu" %>
 			
 			<br>
-
-			<h4>Pour vous évaluer à nouveau : </h4>
 			<br>
-			<div class="container">
-				<div class="row col-xs">
-					<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1 rounded my-sm-3 mb-3" %></p>
-					<p><%= link_to 'Se déconnecter', destroy_user_session_path, class: "btn_1 rounded my-sm-3 mb-3" %></p>
-				</div>
-			</div>
+			<h4>Mes précédents questionnaires :</h4>
 
-
+			<table class="table">
+				<tbody>
+					<%@surveys.each do |survey|%>
+					<tr>
+						<th scope="row">1</th>
+						<td>Questionnaire rempli le <%=survey.created_at.strftime('%d/%m/%Y')%></td>
+						<td>Score : <%=survey.depression_score%></td>
+						<td><%= link_to 'Voir mon résultat', survey_path(survey), class: 'btn_0 rounded mb-3' %></td>
+					</tr>
+					<%end%>
+				</tbody>
+			</table>
 
 		</div>
 	</div>
-</div>
+	<br>
+	<br>
+
+	<div class="container py-lg-5">
+		<div class="row offer-grids">
+			<div class="col-lg-4 col-md-6">
+				<div class="ser1">
+					<div class="bg-layer">
+						<h4 class="">Je souhaite répondre à un nouveau questionnaire ?</h4>
+						<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1 rounded my-sm-3 mb-3" %></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 mt-md-0 mt-4">
+				<div class="ser2">
+					<div class="bg-layer">
+						<h4 class="">Je souhaite modifier mon compte et mes données</h4>
+						<p><%= link_to 'Paramètres du compte', edit_user_registration_path, class: 'btn_1 rounded my-sm-3 mb-3' %></p>
+					</div>
+				</div>
+			</div>
+						<div class="col-lg-4 col-md-6 mt-md-0 mt-4">
+				<div class="ser3">
+					<div class="bg-layer">
+						<h4 class="">Me déconnecter</h4>
+					<p><%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'btn_1 rounded my-sm-3 mb-3' %></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+
