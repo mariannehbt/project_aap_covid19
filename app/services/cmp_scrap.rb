@@ -1,9 +1,8 @@
 # frozen_string_literal: true
-
 require 'nokogiri'
 require 'open-uri'
 
-class CmpScrap
+# class CmpScrap
 
 	def all_departements_list_url
 		url = 'http://www.santeenfrance.fr/annuaire/13-centres-medico-psychologiques-cmp-cattp'
@@ -117,37 +116,43 @@ class CmpScrap
 
 	def perform
 		dpt_list_url = all_departements_list_url
+		sleep 1
 		dpt_list_page = open_all_departements_list_url(dpt_list_url)
+		sleep 1
 		dpt_zip_list = get_all_departements_zip_codes(dpt_list_page)
+		sleep 1
 		cmp_urls = get_cmp_urls(dpt_list_url, dpt_zip_list)
+		sleep 1
 		cmp_names = get_cmp_names(cmp_urls)
+		sleep 1
 		cmp_addresses = get_cmp_addresses(cmp_urls)
+		sleep 1
 		cmp_locations = get_cmp_locations(cmp_urls)
+		sleep 1
 		cmp_phone_number = get_cmp_phone_numbers(cmp_urls)
 
-		# puts '*' * 50
-		# puts "OK !"
-		# puts "URL : #{dpt_list_url}"
-		# puts '.' * 50
-		# puts "Nombre de départements récupérés : #{dpt_zip_list.size}"
-		# puts '.' * 50
-		# puts "Nombre de CMP récupérés : #{cmp_urls.size}"
-		# puts cmp_urls.first
-		# puts '.' * 50
-		# puts "Nombre de noms récupérés : #{cmp_names.size}"
-		# puts cmp_names.first
-		# puts '.' * 50
-		# puts "Nombre d'adresses récupérées : #{cmp_addresses.size}"
-		# puts cmp_addresses.first
-		# puts '.' * 50
-		# puts "Nombre de lieux récupérés : #{cmp_locations.size}"
-		# puts cmp_locations.first
-		# puts '.' * 50
-		# puts "Nombre de téléphones récupérés : #{cmp_phone_number.size}"
-		# puts cmp_phone_number.first
-		# puts '*' * 50
+		puts '*' * 50
+		puts "URL : #{dpt_list_url}"
+		puts '.' * 50
+		puts "Nombre de départements récupérés : #{dpt_zip_list.size}"
+		puts '.' * 50
+		puts "Nombre de CMP récupérés : #{cmp_urls.size}"
+		puts cmp_urls.first
+		puts '.' * 50
+		puts "Nombre de noms récupérés : #{cmp_names.size}"
+		puts cmp_names.first
+		puts '.' * 50
+		puts "Nombre d'adresses récupérées : #{cmp_addresses.size}"
+		puts cmp_addresses.first
+		puts '.' * 50
+		puts "Nombre de lieux récupérés : #{cmp_locations.size}"
+		puts cmp_locations.first
+		puts '.' * 50
+		puts "Nombre de téléphones récupérés : #{cmp_phone_number.size}"
+		puts cmp_phone_number.first
+		puts '*' * 50
 	end
 
 	perform
 
-end
+# end
