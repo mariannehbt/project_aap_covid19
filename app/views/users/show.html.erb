@@ -16,7 +16,7 @@
 			<div class="container">
 				<div class="row col-xs">
 					<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1 rounded my-sm-3 mb-3" %></p>
-					<p><%= link_to 'Se déconnecter', destroy_user_session_path, class: "btn_1 rounded my-sm-3 mb-3" %></p>
+					<p><%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, class: 'btn_1 rounded my-sm-3 mb-3' %></p>
 				</div>
 			</div>
 
