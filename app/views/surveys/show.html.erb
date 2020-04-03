@@ -1,9 +1,10 @@
 <div class="container py-md-3">
-	<h2 class="heading text-center mb-sm-5 mb-4">Résultats</h2>
+	<h2 class="heading  mb-sm-5 mb-4">Résultats</h2>
 	<div class="row">
-		<div class="col-lg-8">
+		<div class="col-lg-12">
 
-			<h4>Votre score est de <%=@survey.depression_score%>.</h4>
+
+			<h4 class="">Votre score est de <%=@survey.depression_score%>.</h4>
 			<br>
 			<br>
 
@@ -11,10 +12,10 @@
 
 			<br>
 			<%= form_tag survey_path(@survey), :method => :get do %>
-			  <p>
-			    <%= text_field_tag :search, params[:search] %>
-			    <%= submit_tag "Entrez votre localisation", :name => nil %>
-			  </p>
+			<p>
+				<%= text_field_tag :search, params[:search] %>
+				<%= submit_tag "Entrez votre localisation", :name => nil %>
+			</p>
 			<% end %>
 			<br>
 
@@ -35,7 +36,8 @@
 			<br>
 
 			<div class="col-xs">
-				<p><%= link_to "Mon espace personnel", user_path(current_user),  class: "btn btn-banner my-sm-3 mb-3" %></p>
+
+				<p><%= link_to "Mon espace personnel", user_path(current_user),  class: "btn_1 rounded my-sm-3 mb-3" %></p>
 			</div>
 		</div>
 
@@ -60,12 +62,12 @@ crossorigin=""></script>
 
 <script type="text/javascript">
 	<%if params[:search] && params[:search] != ''%>
-		var coor = <%= @coord %>;
-  	var zoom = 7;
-  <%else%>
+	var coor = <%= @coord %>;
+	var zoom = 7;
+	<%else%>
 	var coor = [47.0805693, 2.398932];
-  var zoom = 5;
-  <%end%>
+	var zoom = 5;
+	<%end%>
 
 	var mymap = L.map('mapid').setView(coor, zoom);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {

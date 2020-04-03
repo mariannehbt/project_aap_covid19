@@ -1,5 +1,6 @@
 class SurveysController < ApplicationController
-  
+  layout 'survey'
+
 	def show
 		@survey = Survey.find(params[:id])
 	end
@@ -11,7 +12,7 @@ class SurveysController < ApplicationController
     delete_survey_of_today
   end
 
-  def create 
+  def create
   	session[:survey_params].deep_merge!(params[:survey].permit!) if params[:survey]
   	@survey = Survey.new(session[:survey_params])
   	@survey.current_question = session[:survey_question]
@@ -28,7 +29,7 @@ class SurveysController < ApplicationController
   		@survey.next_question
   	end
   	session[:survey_question] = @survey.current_question
-  	if @survey.new_record? 
+  	if @survey.new_record?
   		render "new"
   	else
   		session[:survey_question] = session[:survey_params] = nil
@@ -65,10 +66,10 @@ class SurveysController < ApplicationController
   end
 
   def index
-  end 
+  end
 
 
-  private 
+  private
 
   def depression_score
     @survey = Survey.find(params[:id])
