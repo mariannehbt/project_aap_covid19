@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+  	@surveys = @user.surveys
   end
 
 	def only_see_own_page

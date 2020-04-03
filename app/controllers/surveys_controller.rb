@@ -53,6 +53,14 @@ class SurveysController < ApplicationController
     end
   end
 
+  def destroy
+    @surveys = current_user.surveys
+    @surveys.each do |survey|
+      survey.destroy
+    end
+    flash[:notice] = "Vos données liées aux questionnaires ont bien été supprimées."
+    redirect_to edit_user_registration_path
+  end
 
   def show
     @survey = Survey.find(params[:id])
