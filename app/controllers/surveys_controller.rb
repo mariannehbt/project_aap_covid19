@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  layout 'survey'
+  layout 'survey', :except => :show
 
 	def show
 		@survey = Survey.find(params[:id])
