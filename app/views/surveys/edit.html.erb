@@ -7,35 +7,279 @@
 
       <ul>
         <li><strong>1</strong>
-          <h5>Je ris facilement</h5>
+          <h5>Je me sens tendu(e) ou énervé(e)</h5>
           <%= hidden_field_tag 'survey[q1]', @survey.q1  %>
           <p>
-            <%= "Très souvent" if @survey.q1 == 0 %>
-            <%= "Assez souvent" if @survey.q1 == 1 %>
-            <%= "Rarement" if @survey.q1 == 2 %>
-            <%= "Très rarement" if @survey.q1 == 3 %>
+            <%= "La plupart du temps" if @survey.q1 == 3 %>
+            <%= "Souvent" if @survey.q1 == 2 %>
+            <%= "Rarement" if @survey.q1 == 1 %>
+            <%= "De temps en temps" if @survey.q1 == 0 %>
           </p>
         </li>
         <li><strong>2</strong>
-          <h5>Je me fais du souci</h5>
+          <h5>Je prends plaisir aux mêmes choses qu’autrefois</h5>
           <%= hidden_field_tag 'survey[q2]', @survey.q2  %>
           <p>
-            <%= "Très souvent" if @survey.q2 == 0 %>
-            <%= "Assez souvent" if @survey.q2 == 1 %>
-            <%= "Rarement" if @survey.q2 == 2 %>
-            <%= "Très rarement" if @survey.q2 == 3 %>
+            <%= "Oui, tout autant" if @survey.q2 == 0 %>
+            <%= "Pas autant" if @survey.q2 == 1 %>
+            <%= "Un peu seulement" if @survey.q2 == 2 %>
+            <%= "Presque plus" if @survey.q2 == 3 %>
           </p>
         </li>
         <li><strong>3</strong>
-          <h5>Je suis de bonne humeur</h5>
+          <h5>J’ai une sensation de peur comme si quelque chose d’horrible allait m’arriver</h5>
           <%= hidden_field_tag 'survey[q3]', @survey.q3  %>
           <p>
-            <%= "Très souvent" if @survey.q3 == 0 %>
-            <%= "Assez souvent" if @survey.q3 == 1 %>
-            <%= "Rarement" if @survey.q3 == 2 %>
-            <%= "Très rarement" if @survey.q3 == 3 %>
+            <%= "Oui, très nettement" if @survey.q3 == 3 %>
+            <%= "Oui, mais ce n’est pas trop grave" if @survey.q3 == 2 %>
+            <%= "Un peu, mais cela ne m’inquiète pas" if @survey.q3 == 1 %>
+            <%= "Pas du tout" if @survey.q3 == 0 %>
           </p>
-          <p id="additional_message"></p>
+        </li>
+        <li><strong>4</strong>
+          <h5>Je ris facilement et vois le bon côté des choses</h5>
+          <%= hidden_field_tag 'survey[q4]', @survey.q4  %>
+          <p>
+            <%= "Autant que par le passé" if @survey.q4 == 0 %>
+            <%= "Plus autant qu’avant" if @survey.q4 == 1 %>
+            <%= "Vraiment moins qu’avant" if @survey.q4 == 2 %>
+            <%= "Plus du tout" if @survey.q4 == 3 %>
+          </p>
+        </li>
+        <li><strong>5</strong>
+          <h5>Je me fais du souci</h5>
+          <%= hidden_field_tag 'survey[q5]', @survey.q5  %>
+          <p>
+            <%= "Très souvent" if @survey.q5 == 0 %>
+            <%= "Assez souvent" if @survey.q5 == 1 %>
+            <%= "Occasionnellement" if @survey.q5 == 2 %>
+            <%= "Très occasionnellement" if @survey.q5 == 3 %>
+          </p>
+        </li>
+        <li><strong>6</strong>
+          <h5>Je suis de bonne humeur</h5>
+          <%= hidden_field_tag 'survey[q6]', @survey.q6  %>
+          <p>
+            <%= "Jamais" if @survey.q6 == 3 %>
+            <%= "Rarement" if @survey.q6 == 2 %>
+            <%= "Assez souvent" if @survey.q6 == 1 %>
+            <%= "La plupart du temps" if @survey.q6 == 0 %>
+          </p>
+        </li>
+        <li><strong>7</strong>
+          <h5>Je peux rester tranquillement assis(e) à ne rien faire et me sentir décontracté(e)</h5>
+          <%= hidden_field_tag 'survey[q7]', @survey.q7  %>
+          <p>
+            <%= "Oui, quoi qu’il arrive" if @survey.q7 == 0 %>
+            <%= "Oui, en général" if @survey.q7 == 1 %>
+            <%= "Rarement" if @survey.q7 == 2 %>
+            <%= "Jamais" if @survey.q7 == 3 %>
+          </p>
+        </li>
+        <li><strong>8</strong>
+          <h5>J’ai l’impression de fonctionner au ralenti</h5>
+          <%= hidden_field_tag 'survey[q8]', @survey.q8  %>
+          <p>
+            <%= "Presque toujours" if @survey.q8 == 3 %>
+            <%= "Très souvent" if @survey.q8 == 2 %>
+            <%= "Parfois" if @survey.q8 == 1 %>
+            <%= "Jamais" if @survey.q8 == 0 %>
+          </p>
+        </li>
+        <li><strong>9</strong>
+          <h5>J’éprouve des sensations de peur et j’ai l’estomac noué</h5>
+          <%= hidden_field_tag 'survey[q9]', @survey.q9  %>
+          <p>
+            <%= "Jamais" if @survey.q9 == 0 %>
+            <%= "Parfois" if @survey.q9 == 1 %>
+            <%= "Assez souvent" if @survey.q9 == 2 %>
+            <%= "Très souvent" if @survey.q9 == 3 %>
+          </p>
+        </li>
+        <li><strong>10</strong>
+          <h5>Je ne m’intéresse plus à mon apparence</h5>
+          <%= hidden_field_tag 'survey[q10]', @survey.q10  %>
+          <p>
+            <%= "Plus du tout" if @survey.q10 == 3 %>
+            <%= "Je n’y accorde pas autant d’attention que je devrais" if @survey.q10 == 2 %>
+            <%= "Il se peut que je n’y fasse plus autant attention" if @survey.q10 == 1 %>
+            <%= "J’y prête autant d’attention que par le passé" if @survey.q10 == 0 %>
+          </p>
+        </li>
+        <li><strong>11</strong>
+          <h5>J’ai la bougeotte et n’arrive pas à tenir en place</h5>
+          <%= hidden_field_tag 'survey[q11]', @survey.q11  %>
+          <p>
+            <%= "Oui, c’est tout à fait le cas" if @survey.q11 == 3 %>
+            <%= "Un peu" if @survey.q11 == 2 %>
+            <%= "Pas tellement" if @survey.q11 == 1 %>
+            <%= "Pas du tout" if @survey.q11 == 0 %>
+          </p>
+        </li>
+        <li><strong>12</strong>
+          <h5>Je me réjouis d’avance à l’idée de faire certaines choses</h5>
+          <%= hidden_field_tag 'survey[q12]', @survey.q12  %>
+          <p>
+            <%= "Autant qu’avant" if @survey.q12 == 0 %>
+            <%= "Un peu moins qu’avant" if @survey.q12 == 1 %>
+            <%= "Bien moins qu’avant" if @survey.q12 == 2 %>
+            <%= "Presque jamais" if @survey.q12 == 3 %>
+          </p>
+        </li>
+        <li><strong>13</strong>
+          <h5>J’éprouve des sensations soudaines de panique</h5>
+          <%= hidden_field_tag 'survey[q13]', @survey.q13  %>
+          <p>
+            <%= "Vraiment très souvent" if @survey.q13 == 3 %>
+            <%= "Assez souvent" if @survey.q13 == 2 %>
+            <%= "Pas très souvent" if @survey.q13 == 1 %>
+            <%= "Jamais" if @survey.q13 == 0 %>
+          </p>
+        </li>
+        <li><strong>14</strong>
+          <h5>Je peux prendre plaisir à un bon livre ou à une bonne émission de radio ou de télévision</h5>
+          <%= hidden_field_tag 'survey[q14]', @survey.q14  %>
+          <p>
+            <%= "Souvent" if @survey.q14 == 0 %>
+            <%= "Parfois" if @survey.q14 == 1 %>
+            <%= "Rarement" if @survey.q14 == 2 %>
+            <%= "Très rarement" if @survey.q14 == 3 %>
+          </p>
+        </li>
+        <li><strong>15</strong>
+          <h5>Consommez-vous ce produit ? Tabac</h5>
+          <%= hidden_field_tag 'survey[q15]', @survey.q15  %>
+          <p>
+            <%= "Jamais (ou faible fréquence)" if @survey.q15 == 0 %>
+            <%= "Une fois par mois" if @survey.q15 == 1 %>
+            <%= "Plusieurs fois par mois" if @survey.q15 == 2 %>
+            <%= "Une fois par semaine" if @survey.q15 == 3 %>
+            <%= "Plusieurs fois par semaine" if @survey.q15 == 4 %>
+            <%= "Tous les jours" if @survey.q15 == 5 %>
+          </p>
+        </li>
+         <li><strong>16</strong>
+          <h5>Consommez-vous ce produit ? Alcool</h5>
+          <%= hidden_field_tag 'survey[q16]', @survey.q16  %>
+          <p>
+            <%= "Jamais (ou faible fréquence)" if @survey.q16 == 0 %>
+            <%= "Une fois par mois" if @survey.q16 == 1 %>
+            <%= "Plusieurs fois par mois" if @survey.q16 == 2 %>
+            <%= "Une fois par semaine" if @survey.q16 == 3 %>
+            <%= "Plusieurs fois par semaine" if @survey.q16 == 4 %>
+            <%= "Tous les jours" if @survey.q16 == 5 %>
+          </p>
+        </li>
+         <li><strong>17</strong>
+          <h5>Consommez-vous ce produit ? Cannabis</h5>
+          <%= hidden_field_tag 'survey[q17]', @survey.q17  %>
+          <p>
+            <%= "Jamais (ou faible fréquence)" if @survey.q17 == 0 %>
+            <%= "Une fois par mois" if @survey.q17 == 1 %>
+            <%= "Plusieurs fois par mois" if @survey.q17 == 2 %>
+            <%= "Une fois par semaine" if @survey.q17 == 3 %>
+            <%= "Plusieurs fois par semaine" if @survey.q17 == 4 %>
+            <%= "Tous les jours" if @survey.q17 == 5 %>
+          </p>
+        </li>
+         <li><strong>18</strong>
+          <h5>Consommez-vous ce produit ? Cocaïne</h5>
+          <%= hidden_field_tag 'survey[q18]', @survey.q18  %>
+          <p>
+            <%= "Jamais (ou faible fréquence)" if @survey.q18 == 0 %>
+            <%= "Une fois par mois" if @survey.q18 == 1 %>
+            <%= "Plusieurs fois par mois" if @survey.q18 == 2 %>
+            <%= "Une fois par semaine" if @survey.q18 == 3 %>
+            <%= "Plusieurs fois par semaine" if @survey.q18 == 4 %>
+            <%= "Tous les jours" if @survey.q18 == 5 %>
+          </p>
+        </li>
+         <li><strong>19</strong>
+          <h5>Consommez-vous ce produit ? Héroïne</h5>
+          <%= hidden_field_tag 'survey[q19]', @survey.q19  %>
+          <p>
+            <%= "Jamais (ou faible fréquence)" if @survey.q19 == 0 %>
+            <%= "Une fois par mois" if @survey.q19 == 1 %>
+            <%= "Plusieurs fois par mois" if @survey.q19 == 2 %>
+            <%= "Une fois par semaine" if @survey.q19 == 3 %>
+            <%= "Plusieurs fois par semaine" if @survey.q19 == 4 %>
+            <%= "Tous les jours" if @survey.q19 == 5 %>
+          </p>
+        </li>
+         <li><strong>20</strong>
+          <h5>Consommez-vous ce produit ? Autres produits</h5>
+          <%= hidden_field_tag 'survey[q20]', @survey.q20  %>
+          <p>
+            <%= "Jamais (ou faible fréquence)" if @survey.q20 == 0 %>
+            <%= "Une fois par mois" if @survey.q20 == 1 %>
+            <%= "Plusieurs fois par mois" if @survey.q20 == 2 %>
+            <%= "Une fois par semaine" if @survey.q20 == 3 %>
+            <%= "Plusieurs fois par semaine" if @survey.q20 == 4 %>
+            <%= "Tous les jours" if @survey.q20 == 5 %>
+          </p>
+        </li>
+         <li><strong>21</strong>
+          <h5>En général comment décriviez-vous votre relation de couple ?</h5>
+          <%= hidden_field_tag 'survey[q21]', @survey.q21  %>
+          <p>
+            <%= "Très tendue" if @survey.q21 == 2 %>
+            <%= "Quelque peu tendue" if @survey.q21 == 1 %>
+            <%= "Aucune tension" if @survey.q21 == 0 %>
+          </p>
+        </li>
+        <li><strong>22</strong>
+          <h5>Quand il y a dispute dans votre couple, solutionnez-vous le conflit avec…</h5>
+          <%= hidden_field_tag 'survey[q22]', @survey.q22  %>
+          <p>
+            <%= "Beaucoup de difficultés" if @survey.q22 == 2 %>
+            <%= "Une certaine difficulté" if @survey.q22 == 1 %>
+            <%= "Aucune difficulté" if @survey.q22 == 0 %>
+          </p>
+        </li>
+        <li><strong>23</strong>
+          <h5>Vos disputes vous font-elles parfois vous dépréciez ou vous bouleversent-elles ?</h5>
+          <%= hidden_field_tag 'survey[q23]', @survey.q23  %>
+          <p>
+            <%= "Souvent" if @survey.q23 == 2 %>
+            <%= "Parfois" if @survey.q23 == 1 %>
+            <%= "Jamais" if @survey.q23 == 0 %>
+          </p>
+        </li>
+        <li><strong>24</strong>
+          <h5>Les disputes vous font-elles parfois vous dépréciez ou vous bouleversent-elles ?</h5>
+          <%= hidden_field_tag 'survey[q24]', @survey.q24  %>
+          <p>
+            <%= "Souvent" if @survey.q24 == 2 %>
+            <%= "Parfois" if @survey.q24 == 1 %>
+            <%= "Jamais" if @survey.q24 == 0 %>
+          </p>
+        </li>
+        <li><strong>25</strong>
+          <h5>Les disputes se terminent-elles parfois par des gifles, des coups ou de la bousculade ?</h5>
+          <%= hidden_field_tag 'survey[q25]', @survey.q25  %>
+          <p>
+            <%= "Souvent" if @survey.q25 == 2 %>
+            <%= "Parfois" if @survey.q25 == 1 %>
+            <%= "Jamais" if @survey.q25 == 0 %>
+          </p>
+        </li>
+        <li><strong>26</strong>
+          <h5>Avez-vous parfois peur de ce que peut dire ou faire votre partenaire ?</h5>
+          <%= hidden_field_tag 'survey[q26]', @survey.q26  %>
+          <p>
+            <%= "Souvent" if @survey.q26 == 2 %>
+            <%= "Parfois" if @survey.q26 == 1 %>
+            <%= "Jamais" if @survey.q26 == 0 %>
+          </p>
+        </li>
+        <li><strong>27</strong>
+          <h5>Votre partenaire a-t-il déjà abusé de vous physiquement ?</h5>
+          <%= hidden_field_tag 'survey[q27]', @survey.q27  %>
+          <p>
+            <%= "Souvent" if @survey.q27 == 2 %>
+            <%= "Parfois" if @survey.q27 == 1 %>
+            <%= "Jamais" if @survey.q27 == 0 %>
+          </p>
         </li>
       </ul>
       <div id="bottom-wizard">
@@ -44,5 +288,7 @@
     <% end %>
   </div>
 </div>
+
+
 
 
