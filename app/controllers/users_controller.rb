@@ -14,8 +14,9 @@ class UsersController < ApplicationController
 	end
 
 	def set_frequency
-		current_user.update(notification_frequency: params[:notification_frequency].downcase)
-
+		return unless ["Semaine", "2 Semaines", "Mensuel"].include?(params[:notification_frequency])
+		current_user.update(notification_frequency: params[:notification_frequency])
+		
 		if current_user.save
 			redirect_to current_user, notice: "La fréquence a été configurée avec succès"
 		else

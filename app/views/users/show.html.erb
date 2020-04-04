@@ -30,7 +30,7 @@
 				<%= form_with url: "/set_frequency", local: true do |form| %>
 					<div class="form-group">
 					<div class="styled-select clearfix">
-						<%= form.select :notification_frequency, %w(Weekly Fortnightly Monthly), {}, {class: "form-control"}%>
+						<%= form.select :notification_frequency, ["Semaine", "2 Semaines", "Mensuel"], {}, {class: "form-control"}%>
 					</div>
 					</div>
 					

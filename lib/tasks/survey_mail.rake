@@ -5,11 +5,11 @@ task survey_mail: :environment do
     today = Date.today
     frequency = user.notification_frequency
 
-    if frequency == 'monthly'
+    if frequency == 'Mensuel'
       UserMailer.survey_email(user).deliver if today == today.end_of_month
-    elsif frequency == 'fortnightly'
+    elsif frequency == '2 Semaines'
       UserMailer.survey_email(user).deliver if today.day == 15
-    elsif frequency == 'weekly'
+    elsif frequency == 'Semaine'
       UserMailer.survey_email(user).deliver if today.saturday?
     end
   end
