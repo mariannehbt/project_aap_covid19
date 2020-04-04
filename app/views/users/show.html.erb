@@ -1,27 +1,44 @@
 <div class="container py-md-3">
-	<h2 class="heading text-center mb-sm-5 mb-4">Bienvenue <%=@user.username%></h2>
 	<div class="row">
-		<div class="col-lg-8">
-
-
-			<h4>L'évolution de votre score :</h4>
-			<br>
-
-			<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score) %>
-			
-			<br>
-
-			<h4>Pour vous évaluer à nouveau : </h4>
-			<br>
-			<div class="container">
-				<div class="row col-xs">
-					<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1 rounded my-sm-3 mb-3" %></p>
-					<p><%= link_to 'Se déconnecter', destroy_user_session_path, class: "btn_1 rounded my-sm-3 mb-3" %></p>
-				</div>
-			</div>
-
-
-
+	<aside class="col-lg-4">
+		<div class="box_style_2">
+			<h4 class="heading mb-sm-5 mb-4">Bienvenue <%=@user.username%></h4>
+			<hr class="styled">
+			<h5>Pour vous évaluer à nouveau: </h5>
+			<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1  my-sm-3 mb-3" %></p>
+			<hr class="styled">
+			<h5>Changer la fréquence des envois: </h5>
+			<p><a href="#openModal-about" class="btn_1  my-sm-3 mb-3">Changer la fréquence</a></p>
+			<hr class="styled">
+			<p><%= link_to 'Se déconnecter', destroy_user_session_path, class: "btn_1  my-sm-3 mb-3" %></p>
+			<hr class="styled">
 		</div>
+	</aside>
+	<!--End aside -->
+	<div class="col-lg-8">
+
+		<h4>L'évolution de votre score :</h4>
+		<br>
+
+		<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score) %>
+		<br>
+		<br>
+		<!--modals-->
+		<div id="openModal-about" class="modalDialog">
+			<div>
+				<a href="#close" title="Close" class="close">X</a>
+				<%= form_with url: "/set_frequency", local: true do |form| %>
+					<div class="form-group">
+					<div class="styled-select clearfix">
+						<%= form.select :notification_frequency, %w(Weekly Fortnightly Monthly), {}, {class: "form-control"}%>
+					</div>
+					</div>
+					
+					<%= form.submit "Sauver", class: "btn_1 rounded my-sm-3 mb-3" %>
+					
+				<% end %>
+			</div>
+		</div>
+	</div>
 	</div>
 </div>
