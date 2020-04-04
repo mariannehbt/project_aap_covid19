@@ -10,7 +10,7 @@
 			<h5>Changer la fréquence des envois: </h5>
 			<p><a href="#openModal-about" class="btn_1  my-sm-3 mb-3">Changer la fréquence</a></p>
 			<hr class="styled">
-			<p><%= link_to 'Se déconnecter', destroy_user_session_path, class: "btn_1  my-sm-3 mb-3" %></p>
+			<p><%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, :class =>'user', class: "btn_1  my-sm-3 mb-3" %></p>
 			<hr class="styled">
 		</div>
 	</aside>
