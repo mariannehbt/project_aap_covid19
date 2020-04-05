@@ -2,7 +2,7 @@
 	<div class="row">
 	<aside class="col-lg-4">
 		<div class="box_style_2">
-			<h4 class="heading mb-sm-5 mb-4">Bienvenue <%=@user.username%></h4>
+			<h4 class="heading mb-sm-5 mb-4">Bienvenue <%=@user.username.capitalize%></h4>
 			<hr class="styled">
 			<h5>Pour vous évaluer à nouveau: </h5>
 			<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1  my-sm-3 mb-3" %></p>
@@ -10,8 +10,10 @@
 			<h5>Changer la fréquence des envois: </h5>
 			<p><a href="#openModal-about" class="btn_1  my-sm-3 mb-3">Changer la fréquence</a></p>
 			<hr class="styled">
-			<p><%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, :class =>'user', class: "btn_1  my-sm-3 mb-3" %></p>
+			<h5 class="">Je souhaite modifier mon compte et mes données</h5>
+			<p><%= link_to 'Paramètres du compte', edit_user_registration_path, class: 'btn_1  my-sm-3 mb-3' %></p>
 			<hr class="styled">
+			<p><%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, :class =>'user', class: "btn_1  my-sm-3 mb-3" %></p>
 		</div>
 	</aside>
 	<!--End aside -->
@@ -23,6 +25,21 @@
 		<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score) %>
 		<br>
 		<br>
+		<br>
+		<h4>Mes précédents questionnaires :</h4>
+
+		<table class="table">
+			<tbody>
+				<%@surveys.each do |survey|%>
+				<tr>
+					<th scope="row">1</th>
+					<td>Questionnaire rempli le <%=survey.created_at.strftime('%d/%m/%Y')%></td>
+					<td>Score : <%=survey.depression_score%></td>
+					<td><%= link_to 'Voir mon résultat', survey_path(survey), class: 'btn_1 rounded mb-3' %></td>
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
 		<!--modals-->
 		<div id="openModal-about" class="modalDialog">
 			<div>
@@ -39,6 +56,8 @@
 				<% end %>
 			</div>
 		</div>
-	</div>
+		</div>
 	</div>
 </div>
+
+
