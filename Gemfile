@@ -6,7 +6,6 @@ ruby '2.5.1'
 gem 'devise'
 gem 'dotenv-rails'
 gem 'nokogiri'
-gem 'open-uri'
 gem 'watir'
 gem 'webdrivers'
 
@@ -49,11 +48,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'faker'
-<<<<<<< HEAD
-  gem 'pry'
-=======
   gem 'letter_opener'
->>>>>>> development
   gem 'table_print'
 end
 
