@@ -5,6 +5,9 @@ ruby '2.5.1'
 
 gem 'devise'
 gem 'nokogiri'
+gem 'open-uri'
+gem 'watir'
+gem 'webdrivers'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
@@ -41,11 +44,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Add Marianne 30/05/2020
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'faker'
+  gem 'pry'
   gem 'table_print'
 end
 

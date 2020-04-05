@@ -1,158 +1,116 @@
-# frozen_string_literal: true
 require 'nokogiri'
 require 'open-uri'
+require 'pry'
+require 'watir'
+require 'webdrivers'
 
-# class CmpScrap
+class CmpScrap
+	attr_accessor :dpts_urls_array, :dpts_sub_urls_array, :cmps_urls_array, :cmps_names_array, :cmps_addresses_array, :cmps_locations_array, :cmps_phone_numbers_array, :all_data_array
 
-	def all_departements_list_url
-		url = 'http://www.santeenfrance.fr/annuaire/13-centres-medico-psychologiques-cmp-cattp'
-		return url
+	def initialize
+		@browser = Watir::Browser.new :chrome, headless: true
+		@domain = 'http://www.santeenfrance.fr/'
+		@directory = '/annuaire/13-centres-medico-psychologiques-cmp-cattp'
+		@dpt_path = '/dep:'
+		@page_path = '/page:'
+		@dpts_urls_array = []
+		@dpts_sub_urls_array = []
+		@cmps_urls_array = []
+		@cmps_names_array = []
+		@cmps_addresses_array = []
+		@cmps_locations_array = []
+		@cmps_phone_numbers_array = []
+		@all_data_array = []
 	end
 
-	def open_all_departements_list_url(url)
-		html_content = open(url)
-		page = Nokogiri::HTML(html_content)
-		return page
-	end
-
-	def get_all_departements_zip_codes(page)
-		departements = page.xpath("//*[@id='page']/div[3]/div/div[1]/div/ul/li/a")
-		departements_array = []
-		departements.each do |each_departement|
-			departements_array << (each_departement.text).split('(').last.split(')').first
+	def get_departments_urls
+		@browser.goto @domain + @directory
+		Nokogiri::HTML(@browser.html).xpath("//*[@id='page']/div[3]/div/div[1]/div/ul/li/a").each do |dpt|
+			@dpts_urls_array << @domain + @directory + @dpt_path + dpt.text.split('(').last.split(')').first
 		end
-	  return departements_array
+		return @dpts_urls_array
 	end
 
-	def get_cmp_urls(url, zip_codes)
-		departement_url = (url+'/dep:')
-		website_url = 'http://www.santeenfrance.fr/'
-		urls_array = []
-		zip_codes.each do |zip_code|
-			html_content = open(departement_url+zip_code.to_s)
-			page = Nokogiri::HTML(html_content)
+	def get_departments_sub_urls(dpts_urls)
+		dpts_urls.each do |dpt|
+			@browser.goto dpt
+			page = Nokogiri::HTML(@browser.html)
 			x = page.xpath("//*[@id='page']/div[3]/div/div[1]/div/div/ul/li/span/a[@rel='last']")
 			case x.size
 			when 0
-				cmp_urls = page.xpath("//*[@id='page']/div[3]/div/div[1]/ul/li/div[2]/h3/a")
-				cmp_urls.each do |cmp_url|
-					case (cmp_url.text).start_with?("CMP ", "C.M.P. ")
-					when true
-						urls_array << website_url+(cmp_url.first)[1]
-					end
-				end
+				@dpts_sub_urls_array << dpt
 			else
-				cmp_urls = page.xpath("//*[@id='page']/div[3]/div/div[1]/ul/li/div[2]/h3/a")
-				cmp_urls.each do |cmp_url|
-					case (cmp_url.text).start_with?("CMP ", "C.M.P. ")
-					when true
-						urls_array << website_url+(cmp_url.first)[1]
-					end
-				end
-				departement_last_page = page.xpath("//*[@id='page']/div[3]/div/div[1]/div/div/ul/li/span/a[@rel='last']").to_s.split(':').last.split('"').first
-				departement_url_n = (departement_url+zip_code.to_s+'/page:')
-				for i in 2..departement_last_page.to_i
-					html_content_n = open(departement_url_n+i.to_s)
-					page_n = Nokogiri::HTML(html_content_n)
-					cmp_urls_n = page_n.xpath("//*[@id='page']/div[3]/div/div[1]/ul/li/div[2]/h3/a")
-					cmp_urls_n.each do |cmp_url_n|
-						case (cmp_url_n.text).start_with?("CMP ", "C.M.P. ")
-						when true
-							urls_array << website_url+(cmp_url_n.first)[1]
-						end
-					end
+				@dpts_sub_urls_array << dpt
+				dpt_last_page = page.xpath("//*[@id='page']/div[3]/div/div[1]/div/div/ul/li/span/a[@rel='last']").to_s.split(':').last.split('"').first
+				for i in 2..dpt_last_page.to_i
+					@dpts_sub_urls_array << dpt + @page_path + i.to_s
 				end
 			end
 		end
-		return urls_array
+		return @dpts_sub_urls_array
 	end
 
-	def get_cmp_names(cmp_urls_list)
-		names_array = []
-		cmp_urls_list.each do |cmp_url|
-			html_content = open(cmp_url)
-			page = Nokogiri::HTML(html_content)
-			cmp_name = page.xpath("//*[@id='view_etablissement']/div[1]/div[2]/h1/span/text()")
-			names_array << (cmp_name).to_s.split(',').first
+	def get_cmps_urls(dpts_sub_urls)
+		dpts_sub_urls.each do |dpt_sub_url|
+			@browser.goto dpt_sub_url
+			Nokogiri::HTML(@browser.html).xpath("//*[@id='page']/div[3]/div/div[1]/ul/li/div[2]/h3/a").each do |medical_center|
+				case medical_center.text.start_with?("CMP ", "C.M.P. ")
+				when true
+					@cmps_urls_array << @domain + medical_center.first[1]
+				end
+			end
 		end
-		return names_array
+		return @cmps_urls_array
 	end
 
-	def get_cmp_addresses(cmp_urls_list)
-		addresses_array = []
-		cmp_urls_list.each do |cmp_url|
-			html_content = open(cmp_url)
-			page = Nokogiri::HTML(html_content)
-			cmp_address = page.xpath("//*[@id='left-col']/div[2]/div[1]/span")
-			cmp_address_text = cmp_address.at("//span[@itemprop = 'streetAddress']").children.text
-			addresses_array << (cmp_address_text)
+	def get_cmps_names(cmps_urls)
+		cmps_urls.each do |cmp_url|
+			@browser.goto cmp_url
+			@cmps_names_array << Nokogiri::HTML(@browser.html).xpath("//*[@id='view_etablissement']/div[1]/div[2]/h1/span/text()").to_s.split(',').first
 		end
-		return addresses_array
+		return @cmps_names_array
 	end
 
-	def get_cmp_locations(cmp_urls_list)
-		locations_array = []
-		cmp_urls_list.each do |cmp_url|
-			html_content = open(cmp_url)
-			page = Nokogiri::HTML(html_content)
-			cmp_location = page.xpath("//*[@id='left-col']/div[2]/div[1]/span")
-			cmp_location_text = cmp_location.at("//span[@itemprop = 'addressLocality']").children.text
-			locations_array << (cmp_location_text)
+	def get_cmps_addresses(cmps_urls)
+		cmps_urls.each do |cmp_url|
+			@browser.goto cmp_url
+			@cmps_addresses_array << Nokogiri::HTML(@browser.html).xpath("//*[@id='left-col']/div[2]/div[1]/span").at("//span[@itemprop = 'streetAddress']").children.text
 		end
-		return locations_array
+		return @cmps_addresses_array
 	end
 
-	def get_cmp_phone_numbers(cmp_urls_list)
-		phone_numbers_array = []
-		cmp_urls_list.each do |cmp_url|
-			html_content = open(cmp_url)
-			page = Nokogiri::HTML(html_content)
-			cmp_phone_number = page.xpath("//*[@id='left-col']/div[2]/div[1]/div[1]/a")
-			cmp_phone_number_text = cmp_phone_number.at("//span[@itemprop = 'telephone']").children.text
-			phone_numbers_array << (cmp_phone_number_text)
+	def get_cmps_locations(cmps_urls)
+		cmps_urls.each do |cmp_url|
+			@browser.goto cmp_url
+			@cmps_locations_array << Nokogiri::HTML(@browser.html).xpath("//*[@id='left-col']/div[2]/div[1]/span").at("//span[@itemprop = 'addressLocality']").children.text
 		end
-		return phone_numbers_array
+		return @cmps_locations_array
+	end
+
+	def get_cmps_phone_numbers(cmps_urls)
+		cmps_urls.each do |cmp_url|
+			@browser.goto cmp_url
+			@cmps_phone_numbers_array << Nokogiri::HTML(@browser.html).xpath("//*[@id='left-col']/div[2]/div[1]/div[1]/a").at("//span[@itemprop = 'telephone']").children.text
+		end
+		return @cmps_phone_numbers_array
+	end
+
+	def all_data
+		@all_data_array = @cmps_names_array.zip([@cmps_addresses_array, @cmps_locations_array, @cmps_phone_numbers_array].transpose).to_h
 	end
 
 	def perform
-		dpt_list_url = all_departements_list_url
-		sleep 1
-		dpt_list_page = open_all_departements_list_url(dpt_list_url)
-		sleep 1
-		dpt_zip_list = get_all_departements_zip_codes(dpt_list_page)
-		sleep 1
-		cmp_urls = get_cmp_urls(dpt_list_url, dpt_zip_list)
-		sleep 1
-		cmp_names = get_cmp_names(cmp_urls)
-		sleep 1
-		cmp_addresses = get_cmp_addresses(cmp_urls)
-		sleep 1
-		cmp_locations = get_cmp_locations(cmp_urls)
-		sleep 1
-		cmp_phone_number = get_cmp_phone_numbers(cmp_urls)
-
-		puts '*' * 50
-		puts "URL : #{dpt_list_url}"
-		puts '.' * 50
-		puts "Nombre de départements récupérés : #{dpt_zip_list.size}"
-		puts '.' * 50
-		puts "Nombre de CMP récupérés : #{cmp_urls.size}"
-		puts cmp_urls.first
-		puts '.' * 50
-		puts "Nombre de noms récupérés : #{cmp_names.size}"
-		puts cmp_names.first
-		puts '.' * 50
-		puts "Nombre d'adresses récupérées : #{cmp_addresses.size}"
-		puts cmp_addresses.first
-		puts '.' * 50
-		puts "Nombre de lieux récupérés : #{cmp_locations.size}"
-		puts cmp_locations.first
-		puts '.' * 50
-		puts "Nombre de téléphones récupérés : #{cmp_phone_number.size}"
-		puts cmp_phone_number.first
-		puts '*' * 50
+		dpts_urls = get_departments_urls
+		dpts_sub_urls = get_departments_sub_urls(dpts_urls)
+		cmps_urls = get_cmps_urls(dpts_sub_urls)
+		cmps_names = get_cmps_names(cmps_urls)
+		cmps_addresses = get_cmps_addresses(cmps_urls)
+		cmps_locations = get_cmps_locations(cmps_urls)
+		cmps_phone_numbers = get_cmps_phone_numbers(cmps_urls)
+		all_data = all_data
 	end
 
-	perform
+end
 
-# end
+binding.pry
+puts "end of file"
