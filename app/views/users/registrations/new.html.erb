@@ -1,16 +1,15 @@
-<h2>S'inscrire</h2>
-
+<div class="container">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "pseudo" %>
+    <%= f.text_field :username, autofocus: true, autocomplete: "pseudo", class: "form-control", placeholder: "Pseudo" %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Adresse Email" %>
   </div>
 
   <div class="field">
@@ -18,17 +17,55 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Mots de passe" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Mots de passe de confirmation" %>
   </div>
+
+  <!-- /row -->
+  <div class="form-group terms">
+    <label class="container_check">Veuillez accepter<a href="#" data-toggle="modal" data-target="#terms"> les conditions générales.</a>
+      <input type="checkbox" name="terms" value="Yes" class="required">
+      <span class="checkmark"></span>
+    </label>
+  </div>
+
+
+    <%= f.hidden_field :surveyid, :value => params[:id] %>
+
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+  <br>
+    <%= f.submit "S'inscrire", class: "form-control", class: "btn_1 rounded" %>
   </div>
 <% end %>
+  <br>
+  <%= render "users/shared/links" %>
+</div>
 
-<%= render "users/shared/links" %>
+
+  <!-- Modal Conditions -->
+    <div id="terms" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header login-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Conditions Générale</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                  <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                  <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn_1 rounded" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+

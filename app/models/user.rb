@@ -3,8 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :surveys
+
+  has_many :surveys, dependent: :destroy
 
   validates :username,
   presence: true
+
+  after_create :welcome_send
+
+  def welcome_send
+  	UserMailer.welcome_email(self).deliver_now
+  end
 end

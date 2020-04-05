@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 
 gem 'devise'
+gem 'dotenv-rails'
 gem 'nokogiri'
 gem 'open-uri'
 gem 'watir'
@@ -48,7 +49,11 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'faker'
+<<<<<<< HEAD
   gem 'pry'
+=======
+  gem 'letter_opener'
+>>>>>>> development
   gem 'table_print'
 end
 
@@ -73,3 +78,12 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "pry", "~> 0.13.0"
+
+gem "chartkick", "~> 3.3"
+
+gem "groupdate", "~> 5.0"
+
+gem "geocoder", "~> 1.6"
+
+gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
