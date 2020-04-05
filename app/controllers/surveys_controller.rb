@@ -1,5 +1,6 @@
 class SurveysController < ApplicationController
-  
+  layout 'survey', :except => :show
+
 	def show
 		@survey = Survey.find(params[:id])
 	end
@@ -8,9 +9,10 @@ class SurveysController < ApplicationController
   	session[:survey_params] ||= {}
   	@survey = Survey.new(session[:survey_params])
   	@survey.current_question = session[:survey_question]
+    delete_survey_of_today
   end
 
-  def create 
+  def create
   	session[:survey_params].deep_merge!(params[:survey].permit!) if params[:survey]
   	@survey = Survey.new(session[:survey_params])
   	@survey.current_question = session[:survey_question]
@@ -27,7 +29,7 @@ class SurveysController < ApplicationController
   		@survey.next_question
   	end
   	session[:survey_question] = @survey.current_question
-  	if @survey.new_record? 
+  	if @survey.new_record?
   		render "new"
   	else
   		session[:survey_question] = session[:survey_params] = nil
@@ -51,20 +53,44 @@ class SurveysController < ApplicationController
     end
   end
 
+  def destroy
+    @surveys = current_user.surveys
+    @surveys.each do |survey|
+      survey.destroy
+    end
+    flash[:notice] = "Vos données liées aux questionnaires ont bien été supprimées."
+    redirect_to edit_user_registration_path
+  end
 
   def show
     @survey = Survey.find(params[:id])
+    if params[:search] && params[:search] != ''
+      @cmps = Cmp.near(params[:search], 150, units: :km, :order => :distance)
+      results = Geocoder.search(params[:search])
+      @coord = results.first.coordinates
+    else
+      @cmps = Cmp.all
+    end
   end
 
   def index
-  end 
+  end
 
 
-  private 
+  private
 
   def depression_score
     @survey = Survey.find(params[:id])
     return @survey.q1 + @survey.q2 + @survey.q3
+  end
+
+  def delete_survey_of_today
+    if user_signed_in? && current_user.surveys.last 
+      if current_user.surveys.last.created_at.strftime("%d/%m/%y") == Date.today.strftime("%d/%m/%y") 
+        #delete the survey of today if user wants to take another one on same day
+        current_user.surveys.last.delete
+      end
+    end
   end
 
 end

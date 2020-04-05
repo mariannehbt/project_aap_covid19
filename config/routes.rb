@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations'}
   resources :surveys
   resources :users, only: :show
+  post 'set_frequency', to: "users#set_frequency"
 end

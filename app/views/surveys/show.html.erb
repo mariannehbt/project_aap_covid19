@@ -1,29 +1,97 @@
 <div class="container py-md-3">
-	<h2 class="heading text-center mb-sm-5 mb-4">Résultats</h2>
+	<h2 class="heading  mb-sm-5 mb-4">Résultats du <%=@survey.created_at.strftime('%d/%m/%Y')%></h2>
 	<div class="row">
-		<div class="col-lg-8">
+		<div class="col-lg-12">
 
 
-			<h4>Votre score est de <%=@survey.depression_score%>.</h4>
+			<h4 class="">Votre score est de <%=@survey.depression_score%>.</h4>
 			<br>
 			<br>
+
+			<h4>Les C.M.P. près de chez vous :</h4>
+
+			<br>
+			<%= form_tag survey_path(@survey), :method => :get do %>
+			<p>
+				<%= text_field_tag :search, params[:search] %>
+				<%= submit_tag "Entrez votre localisation", :name => nil %>
+			</p>
+			<% end %>
+			<br>
+
+			<%if params[:search] && params[:search] != '' %>
+			<p>Nous avons trouvé <%=@cmps.length%> CMP autour de chez vous</p>
+			<%else%>
+			<%end%>
+
+
+			<div id="mapid"></div>
+
+			<br>
+			<br>
+
 
 			<% if user_signed_in?%>
 			<h4>Accédez à votre espace personnel pour retrouvez vos résultats :</h4>
 			<br>
 
 			<div class="col-xs">
-					<p><%= link_to "Mon espace personnel", user_path(current_user),  class: "btn btn-banner my-sm-3 mb-3" %></p>
-				</div>
+
+				<p><%= link_to "Mon espace personnel", user_path(current_user),  class: "btn_1 rounded my-sm-3 mb-3" %></p>
 			</div>
-
-
-			<%else%>
-			<h4>Inscrivez-vous pour bénéficier d'un suivi par email :</h4>
-			<br>
-			<%= render "sign_up" %>
-			<%end%>
-
 		</div>
+
+
+		<%else%>
+		<h4>Inscrivez-vous pour bénéficier d'un suivi par email :</h4>
+		<br>
+		<%= render "sign_up" %>
+		<%end%>
+
 	</div>
 </div>
+</div>
+
+
+
+
+<!-- Javascript for OpenStreetMap -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+crossorigin=""></script>
+
+<script type="text/javascript">
+	<%if params[:search] && params[:search] != ''%>
+	var coor = <%= @coord %>;
+	var zoom = 7;
+	<%else%>
+	var coor = [47.0805693, 2.398932];
+	var zoom = 5;
+	<%end%>
+
+	var mymap = L.map('mapid').setView(coor, zoom);
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		minZoom: 1,
+		maxZoom: 20,
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		accessToken: 'pk.eyJ1IjoiZW1pbGllZW1zIiwiYSI6ImNrOGphOWdybTA2cnEzcW10OWxsdGQ2eTEifQ.5z_HnBHR8G75v2ezKwg2Iw'
+	}).addTo(mymap);
+
+	// Initialization of latitude and longitude for each cmp
+	var cmps = {<%@cmps.each do |cmp|%>
+		"<%=cmp.name%>": { "lat": <%=cmp.latitude%>, "lon": <%=cmp.longitude%> },
+		<%end%>
+	};
+
+	// Loop in the cmp list for the marker
+	for (cmp in cmps) {
+		var marker = L.marker([cmps[cmp].lat, cmps[cmp].lon]).addTo(mymap);
+	// Popup with name of each cmp 
+	marker.bindPopup(cmp);
+}               	
+
+</script>
+

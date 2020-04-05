@@ -1,10 +1,31 @@
-<h4 class="about-left">Question 2 / 3</h4>
-<hr>
-<h4>Je me fais du soucis</h4> 
-<br>
+<div class="step">
+  <h3 class="main_question"><strong>2/3</strong>Je me fais du soucis</h3>
 
-<%= f.collection_radio_buttons :q2, [["0", "Très souvent"],["1","Souvent"],["2","Rarement"],["3","Très rarement"]], :first, :last, :checked => session[:survey_params]["q2"] do |b| %> 
-<%= b.label { b.radio_button + " " + b.text } %><br>
+  <div class="form-group">
+    <label class="container_radio version_2">Très souvent
+      <%= radio_button_tag 'survey[q2]', 0 %>
+      <span class="checkmark"></span>
+    </label>
+  </div>
 
-<%end%>
+  <div class="form-group">
+    <label class="container_radio version_2">Souvent
+      <%= radio_button_tag 'survey[q2]', 1 %>
+      <span class="checkmark"></span>
+    </label>
+  </div>
 
+  <div class="form-group">
+    <label class="container_radio version_2">Rarement
+      <%= radio_button_tag 'survey[q2]', 2 %>
+      <span class="checkmark"></span>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label class="container_radio version_2">Très rarement
+      <%= radio_button_tag 'survey[q2]', 3 %>
+      <span class="checkmark"></span>
+    </label>
+  </div>
+</div>
