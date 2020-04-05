@@ -1,65 +1,63 @@
 <div class="container py-md-3">
-	<h2 class="heading text-center mb-sm-5 mb-4">Bienvenue dans votre espace personnel, <%=@user.username%>.</h2>
 	<div class="row">
-		<div class="col-lg-8">
-
-
-			<h4>L'évolution de mon score :</h4>
-			<br>
-
-			<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score), ytitle: "Score obtenu" %>
-			
-			<br>
-			<br>
-			<h4>Mes précédents questionnaires :</h4>
-
-			<table class="table">
-				<tbody>
-					<%@surveys.each do |survey|%>
-					<tr>
-						<th scope="row">1</th>
-						<td>Questionnaire rempli le <%=survey.created_at.strftime('%d/%m/%Y')%></td>
-						<td>Score : <%=survey.depression_score%></td>
-						<td><%= link_to 'Voir mon résultat', survey_path(survey), class: 'btn_0 rounded mb-3' %></td>
-					</tr>
-					<%end%>
-				</tbody>
-			</table>
-
+	<aside class="col-lg-4">
+		<div class="box_style_2">
+			<h4 class="heading mb-sm-5 mb-4">Bienvenue <%=@user.username.capitalize%></h4>
+			<hr class="styled">
+			<h5>Pour vous évaluer à nouveau: </h5>
+			<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1  my-sm-3 mb-3" %></p>
+			<hr class="styled">
+			<h5>Changer la fréquence des envois: </h5>
+			<p><a href="#openModal-about" class="btn_1  my-sm-3 mb-3">Changer la fréquence</a></p>
+			<hr class="styled">
+			<h5 class="">Je souhaite modifier mon compte et mes données</h5>
+			<p><%= link_to 'Paramètres du compte', edit_user_registration_path, class: 'btn_1  my-sm-3 mb-3' %></p>
+			<hr class="styled">
+			<p><%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, :class =>'user', class: "btn_1  my-sm-3 mb-3" %></p>
 		</div>
-	</div>
-	<br>
-	<br>
+	</aside>
+	<!--End aside -->
+	<div class="col-lg-8">
 
-	<div class="container py-lg-5">
-		<div class="row offer-grids">
-			<div class="col-lg-4 col-md-6">
-				<div class="ser1">
-					<div class="bg-layer">
-						<h4 class="">Je souhaite répondre à un nouveau questionnaire ?</h4>
-						<p><%= link_to "Accéder au questionnaire", new_survey_path,  class: "btn_1 rounded my-sm-3 mb-3" %></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-md-0 mt-4">
-				<div class="ser2">
-					<div class="bg-layer">
-						<h4 class="">Je souhaite modifier mon compte et mes données</h4>
-						<p><%= link_to 'Paramètres du compte', edit_user_registration_path, class: 'btn_1 rounded my-sm-3 mb-3' %></p>
-					</div>
-				</div>
-			</div>
-						<div class="col-lg-4 col-md-6 mt-md-0 mt-4">
-				<div class="ser3">
-					<div class="bg-layer">
-						<h4 class="">Me déconnecter</h4>
-					<p><%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'btn_1 rounded my-sm-3 mb-3' %></p>
-					</div>
-				</div>
+		<h4>L'évolution de votre score :</h4>
+		<br>
 
+		<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score) %>
+		<br>
+		<br>
+		<br>
+		<h4>Mes précédents questionnaires :</h4>
+
+		<table class="table">
+			<tbody>
+				<%@surveys.each do |survey|%>
+				<tr>
+					<th scope="row">1</th>
+					<td>Questionnaire rempli le <%=survey.created_at.strftime('%d/%m/%Y')%></td>
+					<td>Score : <%=survey.depression_score%></td>
+					<td><%= link_to 'Voir mon résultat', survey_path(survey), class: 'btn_1 rounded mb-3' %></td>
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
+		<!--modals-->
+		<div id="openModal-about" class="modalDialog">
+			<div>
+				<a href="#close" title="Close" class="close">X</a>
+				<%= form_with url: "/set_frequency", local: true do |form| %>
+					<div class="form-group">
+					<div class="styled-select clearfix">
+						<%= form.select :notification_frequency, ["Semaine", "2 Semaines", "Mensuel"], {}, {class: "form-control"}%>
+					</div>
+					</div>
+					
+					<%= form.submit "Sauver", class: "btn_1 rounded my-sm-3 mb-3" %>
+					
+				<% end %>
 			</div>
 		</div>
-
+		</div>
 	</div>
+</div>
 
 

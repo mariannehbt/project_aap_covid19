@@ -13,5 +13,22 @@
  *= require style
  *= require main
  */
- @import "bootstrap";
- @import "users"
+
+/* vendor */
+@import "bootstrap";
+
+
+/* static_pages */
+
+
+/* surveys */
+@import "surveys";
+
+
+/* users */
+@import "users";
+
+
+
+
+

@@ -6,4 +6,9 @@ class UserMailer < ApplicationMailer
 		@url  = 'https://project-aap-covid19.herokuapp.com/users/sign_in'
 		mail(to: @user.email, subject: 'Bienvenue sur Covipsy19 !')
 	end
+
+	def survey_email(user)
+		@user = user
+		mail(to: @user.email, subject: 'Bienvenue sur Covipsy19 !')
+	end
 end
