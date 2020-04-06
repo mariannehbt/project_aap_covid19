@@ -10,21 +10,21 @@
 
   <div class="form-group">
     <label class="container_radio version_2">Oui, mais ce n’est pas trop grave
-      <%= radio_button_tag 'survey[q3]', 2, session[:survey_params]['q1'] == '2' %>
+      <%= radio_button_tag 'survey[q3]', 2, session[:survey_params]['q3'] == '2' %>
       <span class="checkmark"></span>
     </label>
   </div>
 
   <div class="form-group">
     <label class="container_radio version_2">Un peu, mais cela ne m’inquiète pas
-      <%= radio_button_tag 'survey[q3]', 1, session[:survey_params]['q1'] == '1' %>
+      <%= radio_button_tag 'survey[q3]', 1, session[:survey_params]['q3'] == '1' %>
       <span class="checkmark"></span>
     </label>
   </div>
 
   <div class="form-group">
     <label class="container_radio version_2">Pas du tout
-      <%= radio_button_tag 'survey[q3]', 0, session[:survey_params]['q1'] == '0' %>
+      <%= radio_button_tag 'survey[q3]', 0, session[:survey_params]['q3'] == '0' %>
       <span class="checkmark"></span>
     </label>
   </div>

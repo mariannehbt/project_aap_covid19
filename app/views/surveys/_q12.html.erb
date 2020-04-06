@@ -3,28 +3,28 @@
 
   <div class="form-group">
     <label class="container_radio version_2">Autant qu’avant
-      <input type="radio" name="survey[q12]" value="0" id="survey_q12_0" class="required">
+      <%= radio_button_tag 'survey[q12]', 0, session[:survey_params]['q12'] == '0' %>
       <span class="checkmark"></span>
     </label>
   </div>
 
   <div class="form-group">
     <label class="container_radio version_2">Un peu moins qu’avant
-      <input type="radio" name="survey[q12]" value="1" id="survey_q12_1" class="required">
+      <%= radio_button_tag 'survey[q12]', 1, session[:survey_params]['q12'] == '1' %>
       <span class="checkmark"></span>
     </label>
   </div>
 
   <div class="form-group">
     <label class="container_radio version_2">Bien moins qu’avant
-      <input type="radio" name="survey[q12]" value="2" id="survey_q12_2" class="required">
+      <%= radio_button_tag 'survey[q12]', 2, session[:survey_params]['q12'] == '2' %>
       <span class="checkmark"></span>
     </label>
   </div>
 
   <div class="form-group">
     <label class="container_radio version_2">Presque jamais
-      <input type="radio" name="survey[q12]" value="3" id="survey_q12_3" class="required">
+      <%= radio_button_tag 'survey[q12]', 3, session[:survey_params]['q12'] == '3' %>
       <span class="checkmark"></span>
     </label>
   </div>

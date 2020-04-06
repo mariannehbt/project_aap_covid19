@@ -3,21 +3,21 @@
 
   <div class="form-group">
     <label class="container_radio version_2">Souvent
-      <input type="radio" name="survey[q23]" value="2" id="survey_q23_2" class="required">
+      <%= radio_button_tag 'survey[q23]', 2, session[:survey_params]['q23'] == '2' %>
       <span class="checkmark"></span>
     </label>
   </div>
 
   <div class="form-group">
     <label class="container_radio version_2">Parfois
-      <input type="radio" name="survey[q23]" value="1" id="survey_q23_1" class="required">
+      <%= radio_button_tag 'survey[q23]', 1, session[:survey_params]['q23'] == '1' %>
       <span class="checkmark"></span>
     </label>
   </div>
 
   <div class="form-group">
     <label class="container_radio version_2">Jamais
-      <input type="radio" name="survey[q23]" value="0" id="survey_q23_0" class="required">
+      <%= radio_button_tag 'survey[q23]', 0, session[:survey_params]['q23'] == '0' %>
       <span class="checkmark"></span>
     </label>
   </div>
