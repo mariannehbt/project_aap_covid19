@@ -1,4 +1,4 @@
-<%= form_with model: @survey, url: surveys_path, local: true, class: "form-group", :validate => true do |f| %>
+<%= form_with model: @survey, url: surveys_path, local: true, required: true, class: "form-group", :validate => true do |f| %>
   <%= render "#{@survey.current_question}", :f => f %>
 
   <div id="bottom-wizard">

@@ -149,7 +149,7 @@ a.btn_1,
     outline: none;
 	cursor: pointer;
     display: inline-block;
-    text-decoration: none;
+    text-decoration: none !important;
     padding: 12px 25px;
     color: #fff;
     font-weight: 600;

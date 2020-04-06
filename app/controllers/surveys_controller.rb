@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  layout 'survey'
+  layout 'survey', :except => :show
 
 	def show
 		@survey = Survey.find(params[:id])
@@ -9,6 +9,7 @@ class SurveysController < ApplicationController
   	session[:survey_params] ||= {}
   	@survey = Survey.new(session[:survey_params])
   	@survey.current_question = session[:survey_question]
+    delete_survey_of_today
   end
 
   def create
@@ -52,9 +53,24 @@ class SurveysController < ApplicationController
     end
   end
 
+  def destroy
+    @surveys = current_user.surveys
+    @surveys.each do |survey|
+      survey.destroy
+    end
+    flash[:notice] = "Vos données liées aux questionnaires ont bien été supprimées."
+    redirect_to edit_user_registration_path
+  end
 
   def show
     @survey = Survey.find(params[:id])
+    if params[:search] && params[:search] != ''
+      @cmps = Cmp.near(params[:search], 150, units: :km, :order => :distance)
+      results = Geocoder.search(params[:search])
+      @coord = results.first.coordinates
+    else
+      @cmps = Cmp.all
+    end
   end
 
   def index
@@ -66,6 +82,15 @@ class SurveysController < ApplicationController
   def depression_score
     @survey = Survey.find(params[:id])
     return @survey.q1 + @survey.q2 + @survey.q3 + @survey.q4 + @survey.q5 + @survey.q6 + @survey.q7 + @survey.q8 + @survey.q9 + @survey.q10 + @survey.q11 + @survey.q12 + @survey.q13 + @survey.q14 + @survey.q15 + @survey.q16 + @survey.q17 + @survey.q18 + @survey.q19 + @survey.q20 + @survey.q21 + @survey.q22 + @survey.q23 + @survey.q24 + @survey.q25 + @survey.q26 + @survey.q27
+  end
+
+  def delete_survey_of_today
+    if user_signed_in? && current_user.surveys.last 
+      if current_user.surveys.last.created_at.strftime("%d/%m/%y") == Date.today.strftime("%d/%m/%y") 
+        #delete the survey of today if user wants to take another one on same day
+        current_user.surveys.last.delete
+      end
+    end
   end
 
 end
