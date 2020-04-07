@@ -54,7 +54,7 @@ class CmpScrap
 		dpts_sub_urls.each do |dpt_sub_url|
 			@browser.goto dpt_sub_url
 			Nokogiri::HTML(@browser.html).xpath("//*[@id='page']/div[3]/div/div[1]/ul/li/div[2]/h3/a").each do |medical_center|
-				case medical_center.text.start_with?("CMP ", "C.M.P. ")
+				case medical_center.text.start_with?("CMP ", "C.M.P. ", "CENTRE MÉDICO-PSYCHOLOGIQUE", "CMP/")
 				when true
 					@cmps_urls_array << @domain + medical_center.first[1]
 				end
