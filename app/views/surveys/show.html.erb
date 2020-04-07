@@ -19,8 +19,10 @@
 			<% end %>
 			<br>
 
-			<%if params[:search] && params[:search] != '' %>
+			<%if params[:search] && params[:search] != '' && @results != [] %>
 			<p>Nous avons trouvé <%=@cmps.length%> CMP autour de chez vous</p>
+			<%elsif @results == []%>
+			<p>Nous n'avons pas trouvé la localisation demandée, merci de renseigner une adresse plus précise.</p>
 			<%else%>
 			<%end%>
 
@@ -61,13 +63,8 @@ integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUT
 crossorigin=""></script>
 
 <script type="text/javascript">
-	<%if params[:search] && params[:search] != ''%>
-	var coor = <%= @coord %>;
-	var zoom = 7;
-	<%else%>
-	var coor = [47.0805693, 2.398932];
-	var zoom = 5;
-	<%end%>
+	var coor = <%= @coor %>;
+	var zoom = <%= @zoom %>;
 
 	var mymap = L.map('mapid').setView(coor, zoom);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -82,15 +79,18 @@ crossorigin=""></script>
 
 	// Initialization of latitude and longitude for each cmp
 	var cmps = {<%@cmps.each do |cmp|%>
-		"<%=cmp.name%>": { "lat": <%=cmp.latitude%>, "lon": <%=cmp.longitude%> },
+		"<%=cmp.name%>": { "lat": <%=cmp.latitude%>, "lon": <%=cmp.longitude%>, "name": "<%=cmp.name%>", "phonenumber": "<%=cmp.phonenumber%>", "adress": "<%=cmp.adress%>"  },
 		<%end%>
 	};
 
 	// Loop in the cmp list for the marker
 	for (cmp in cmps) {
+		  // create popup contents
+    var customPopup = cmps[cmp].name + '<br/>' + cmps[cmp].adress + '<br/>' + cmps[cmp].phonenumber;
+    
 		var marker = L.marker([cmps[cmp].lat, cmps[cmp].lon]).addTo(mymap);
 	// Popup with name of each cmp 
-	marker.bindPopup(cmp);
+	marker.bindPopup(customPopup);
 }               	
 
 </script>

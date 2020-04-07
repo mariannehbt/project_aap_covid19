@@ -1,9 +1,25 @@
 class SurveysController < ApplicationController
   layout 'survey', :except => :show
 
-	def show
-		@survey = Survey.find(params[:id])
-	end
+  def show
+    @survey = Survey.find(params[:id])
+    if params[:search] && params[:search] != ''
+      @cmps = Cmp.near(params[:search], 30, units: :km, :order => :distance)
+      @results = Geocoder.search(params[:search])
+      if @results == []
+        @coor = [47.0805693, 2.398932]
+        @zoom = 5
+        @cmps = Cmp.all
+      else
+        @coor = @results.first.coordinates
+        @zoom = 10
+      end
+    else
+      @coor = [47.0805693, 2.398932]
+      @zoom = 5
+      @cmps = Cmp.all
+    end
+  end
 
   def new
   	session[:survey_params] ||= {}
@@ -60,17 +76,6 @@ class SurveysController < ApplicationController
     end
     flash[:notice] = "Vos données liées aux questionnaires ont bien été supprimées."
     redirect_to edit_user_registration_path
-  end
-
-  def show
-    @survey = Survey.find(params[:id])
-    if params[:search] && params[:search] != ''
-      @cmps = Cmp.near(params[:search], 150, units: :km, :order => :distance)
-      results = Geocoder.search(params[:search])
-      @coord = results.first.coordinates
-    else
-      @cmps = Cmp.all
-    end
   end
 
   def index
