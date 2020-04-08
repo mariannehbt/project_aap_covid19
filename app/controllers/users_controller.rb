@@ -5,6 +5,11 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
   	@surveys = @user.surveys
+  	if @user.notification_frequency 
+  		@frequency = @user.notification_frequency
+  	else 
+  		@frequency = "Jamais"
+  	end
   end
 
 	def only_see_own_page
