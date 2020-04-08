@@ -19,12 +19,17 @@
 	<!--End aside -->
 	<div class="col-lg-8">
 
-		<h4>L'évolution de mon score :</h4>
+		<h4>L'évolution de mon score "Dépression" :</h4>
+		<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score), height: "100px" %>
 		<br>
-
-		<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:depression_score) %>
+		<h4>L'évolution de mon score "Anxiété" :</h4>
+		<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:anxiety_score), height: "100px" %>
 		<br>
+		<h4>L'évolution de mon score "Addiction" :</h4>
+		<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:addiction_score), height: "100px" %>
 		<br>
+		<h4>L'évolution de mon score "Violences conjugales" :</h4>
+		<%= column_chart @user.surveys.group_by_day(:created_at, format: "%d/%m/%Y").maximum(:abuse_score), height: "100px" %>
 		<br>
 		<h4>Mes précédents questionnaires :</h4>
 
@@ -35,6 +40,9 @@
 					<th scope="row">1</th>
 					<td>Questionnaire rempli le <%=survey.created_at.strftime('%d/%m/%Y')%></td>
 					<td>Score : <%=survey.depression_score%></td>
+					<td>Score : <%=survey.anxiety_score%></td>
+					<td>Score : <%=survey.addiction_score%></td>
+					<td>Score : <%=survey.abuse_score%></td>
 					<td><%= link_to 'Voir mon résultat', survey_path(survey), class: 'btn_1 rounded mb-3' %></td>
 				</tr>
 				<%end%>
