@@ -5,6 +5,11 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
   	@surveys = @user.surveys
+  	if @user.notification_frequency 
+  		@frequency = @user.notification_frequency
+  	else 
+  		@frequency = "Jamais"
+  	end
   end
 
 	def only_see_own_page
@@ -15,7 +20,7 @@ class UsersController < ApplicationController
 	end
 
 	def set_frequency
-		return unless ["Semaine", "2 Semaines", "Mensuel"].include?(params[:notification_frequency])
+		return unless ["Jamais", "Semaine", "2 Semaines", "Mensuel"].include?(params[:notification_frequency])
 		current_user.update(notification_frequency: params[:notification_frequency])
 		
 		if current_user.save

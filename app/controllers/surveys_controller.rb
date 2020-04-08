@@ -8,16 +8,16 @@ class SurveysController < ApplicationController
       @results = Geocoder.search(params[:search])
       if @results == []
         @coor = [47.0805693, 2.398932]
-        @zoom = 5
-        @cmps = Cmp.all
+        @zoom = 6
+        @cmps = Cmp.near("Montluçon", 1000, units: :km, :order => :distance)
       else
         @coor = @results.first.coordinates
         @zoom = 10
       end
     else
       @coor = [47.0805693, 2.398932]
-      @zoom = 5
-      @cmps = Cmp.all
+      @zoom = 6
+      @cmps = Cmp.near("Montluçon", 1000, units: :km, :order => :distance)
     end
   end
 
