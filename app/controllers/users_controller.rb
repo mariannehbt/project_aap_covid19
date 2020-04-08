@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 	end
 
 	def set_frequency
-		return unless ["Semaine", "2 Semaines", "Mensuel"].include?(params[:notification_frequency])
+		return unless ["Jamais", "Semaine", "2 Semaines", "Mensuel"].include?(params[:notification_frequency])
 		current_user.update(notification_frequency: params[:notification_frequency])
 		
 		if current_user.save
