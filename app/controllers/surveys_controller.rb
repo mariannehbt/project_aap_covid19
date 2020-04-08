@@ -61,7 +61,7 @@ class SurveysController < ApplicationController
   def update
     @survey = Survey.find(params[:id])
     if @survey.update(params[:survey].permit!)
-      @survey.update(depression_score: depression_score)
+      @survey.update(depression_score: depression_score, anxiety_score: anxiety_score, addiction_score: addiction_score, abuse_score: abuse_score)
       flash[:notice] = "Votre questionnaire a bien été enregistré."
       redirect_to @survey
     else
@@ -86,7 +86,22 @@ class SurveysController < ApplicationController
 
   def depression_score
     @survey = Survey.find(params[:id])
-    return @survey.q1 + @survey.q2 + @survey.q3 + @survey.q4 + @survey.q5 + @survey.q6 + @survey.q7 + @survey.q8 + @survey.q9 + @survey.q10 + @survey.q11 + @survey.q12 + @survey.q13 + @survey.q14 + @survey.q15 + @survey.q16 + @survey.q17 + @survey.q18 + @survey.q19 + @survey.q20 + @survey.q21 + @survey.q22 + @survey.q23 + @survey.q24 + @survey.q25 + @survey.q26 + @survey.q27
+    return @survey.q2 + @survey.q4 + @survey.q6 + @survey.q8 + @survey.q10 + @survey.q12 + @survey.q14
+  end
+
+  def anxiety_score
+    @survey = Survey.find(params[:id])
+    return @survey.q1 + @survey.q3 + @survey.q5 + @survey.q7 + @survey.q9 + @survey.q11 + @survey.q13
+  end
+
+  def addiction_score
+    @survey = Survey.find(params[:id])
+    return @survey.q15 + @survey.q16 + @survey.q17 + @survey.q18 + @survey.q19 + @survey.q20
+  end
+
+  def abuse_score
+    @survey = Survey.find(params[:id])
+    return @survey.q21 + @survey.q22 + @survey.q23 + @survey.q24 + @survey.q25 + @survey.q26 + @survey.q27
   end
 
   def delete_survey_of_today
