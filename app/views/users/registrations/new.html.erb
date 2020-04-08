@@ -1,51 +1,60 @@
-<div class="container">
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<body class="user-log">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center text-uppercase">S'enregister</h5>
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "pseudo", class: "form-control", placeholder: "Pseudo" %>
+              <div class="form-label-group">
+                <%= f.label :username %>
+                <%= f.text_field :username, autofocus: true, autocomplete: "pseudo", class: "form-control", placeholder: "Pseudo" %>
+              </div>
+
+              <div class="form-label-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Adresse Email" %>
+              </div>
+
+              <div class="form-label-group">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %>
+                <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Mots de passe" %>
+              </div>
+
+              <div class="form-label-group">
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Mots de passe de confirmation" %>
+              </div>
+
+              <!-- /row -->
+              <div class="form-group terms">
+                <label class="container_check">Veuillez accepter<a href="#" data-toggle="modal" data-target="#terms"> les conditions générales.</a>
+                  <input type="checkbox" name="terms" value="Yes" class="required">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+
+                <%= f.hidden_field :surveyid, :value => params[:id] %>
+
+              <div class="actions">
+              <br>
+                <%= f.submit "S'inscrire", class: "btn_1 btn-lg btn-block rounded text-uppercase" %>
+              </div>
+                <% end %>
+              <br>
+              <%= render "users/shared/links" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Adresse Email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Mots de passe" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Mots de passe de confirmation" %>
-  </div>
-
-  <!-- /row -->
-  <div class="form-group terms">
-    <label class="container_check">Veuillez accepter<a href="#" data-toggle="modal" data-target="#terms"> les conditions générales.</a>
-      <input type="checkbox" name="terms" value="Yes" class="required">
-      <span class="checkmark"></span>
-    </label>
-  </div>
-
-
-    <%= f.hidden_field :surveyid, :value => params[:id] %>
-
-
-  <div class="actions">
-  <br>
-    <%= f.submit "S'inscrire", class: "form-control btn_1 rounded" %>
-  </div>
-<% end %>
-  <br>
-  <%= render "users/shared/links" %>
-</div>
-
+</body>
 
   <!-- Modal Conditions -->
     <div id="terms" class="modal fade" role="dialog">
@@ -68,4 +77,3 @@
             </div>
         </div>
     </div>
-
