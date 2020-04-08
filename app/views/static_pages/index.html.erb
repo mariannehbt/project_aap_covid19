@@ -1,35 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
 
-</html>
-        <% if user_signed_in? %>
-            <ul>
-                <li>
-                    <%= link_to "Mon Profil (modifier)", edit_user_registration_path, :class =>'user' %>
-                </li>
-                <li>
-                    <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class =>'user' %>
-                </li>
-            </ul>
-        <% else %>
-            <%= link_to "Connexion", new_user_session_path, :class =>'user' %>
-        <% end %>
-        <!-- // page content -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Corona questionnaire">
+    <meta name="author" content="Ansonika">
+    <title>Corona</title>
 
-        <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a> </p>
-                </div>
-            </div>
-        </div>
-        <!-- //copyright -->
-                
-        <!-- move top -->
-        <div class="move-top text-right">
-            <a href="#home" class="move-top"> 
-                <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
-            </a>
-        </div>
-        <!-- move top -->
-    </body>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.jpg">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.jpg">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.jpg">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.jpg">
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600" rel="stylesheet">
+
+</head>
+
+<body>
+	
+	<div id="preloader">
+		<div data-loader="circle-side"></div>
+	</div><!-- /Preload -->
+	
+	<div id="loader_form">
+		<div data-loader="circle-side-2"></div>
+	</div><!-- /loader_form -->
+
+	
+	<section class="parallax_window_in" data-parallax="scroll" data-image-src=<%= image_path("grad-banner-bg.png")%> data-natural-width="1400" data-natural-height="800">
+		<div id="sub_content_in">
+			<h1>Evapsy Questionnaire</h1>
+			<p>"Faites le test pour répondre en citoyen éclairé selon vos symptômes."</p>
+			<%= link_to 'Démarrer le test', new_survey_path, class: "btn_1 rounded" %>
+		</div>
+	</section>
+	<!-- /section -->
+	<main id="general_page">
+		<section class="bg-white add_bottom_60">
+			<div class="container margin_60 ">
+				<div class="main_title">
+					<h2><em></em>Corona les bonnes Manieres</h2>
+					<p>
+						Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos.
+					</p>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-lg-4 mb-5 mb-lg-0">
+						<div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4"><%= image_tag 'prevention-2.png', class: "img-fluid" %></div>
+						<h3>Lavez vos mains</h3>
+						<p class="mb-0">Lavez-vous très régulièrement les mains.</p>
+					</div>
+					<div class="col-lg-4 mb-5 mb-lg-0">
+						<div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4"><%= image_tag 'prevention-3.png', class: "img-fluid" %></div>
+						<h3>Portez un masque</h3>
+						<p class="mb-0">Portez un masque si vous êtes malade.</p>
+					</div>
+					<div class="col-lg-4">
+						<div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4"><%= image_tag 'prevention-4.png', class: "img-fluid" %></div>
+						<h3>Evitez les contacts</h3>
+						<p class="mb-0">Saluez sans serrer la main, n'embrassez personne.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	
+		<div class="container_styled_1">
+			<div class="container margin_60_35">
+				<div class="row">
+					<div class="col-lg-6">
+						<h2 class="nomargin_top"><br>Un questionnaire Simple</h2>
+						<p class="lead">Ex graeco nostrud theophrastus nam, cum tibique reprimique ad. Mea omittam electram te.</p>
+						<p>
+							Ex has nihil liberavisse philosophia. Ne mazim quidam contentiones usu. Id nec <strong>causae periculis </strong>evertitur, stet menandri an pro, his argumentum appellantur eu. An laudem efficiendi has, utinam principes consequat id vel.</p>
+						<p>Ex graeco nostrud theophrastus nam, cum tibique reprimique ad. Mea omittam electram te, eu cum fastidii sapientem delicatissimi. Sed cu eripuit veritus propriae. An eam choro saperet ullamcorper, eam <strong>saperet rationibus</strong> ut. Cu usu tation quaeque vocibus, alterum torquatos persequeris te ius.</p>
+					</div>
+					<div class="col-lg-5 ml-lg-5 add_top_30">
+						<%= image_tag 'corona-img.png', class: "img-fluid" %>
+					</div>
+				</div>
+				<!-- End row -->
+			</div>
+		</div>
+		
+		<!-- End container -->
+		
+	</main>
+	
+	<footer class="clearfix">
+		<div class="container">
+			<p>© 2020 Evapsy</p>
+			<ul>
+				<li><%= image_tag 'https://www.gouvernement.fr/sites/default/files/01_marianne-615x206_3.gif', class: "img-fluid rounded-20", width: "80px", height: "50px" %></li>
+				<li><a href="#0" class="animated_link">Condition Générale</a></li>
+				<li><a href="#0" class="animated_link">Contacts</a></li>
+			</ul>
+		</div>
+	</footer>
+	<!-- end footer-->	
+
+</body>
 </html>
+
+
+        

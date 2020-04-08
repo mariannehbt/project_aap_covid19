@@ -80,3 +80,4 @@ gem "geocoder", "~> 1.6"
 
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
+
