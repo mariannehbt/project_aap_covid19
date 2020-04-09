@@ -26,7 +26,7 @@ Cmp.destroy_all
 #   j=j+1
 # end
 
-scraper = TestScrap.new
+scraper = CmpScrap.new
 scraper.perform
 
 i = 0
