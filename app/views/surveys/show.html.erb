@@ -3,14 +3,52 @@
 	<div class="row">
 		<div class="col-lg-12">
 
+			<% if @survey.depression_score > 10 %>
+				<h4 class="">Votre score "Dépression" est de <%=@survey.depression_score%> : symptomatologie certaine.</h4>
+			<% elsif @survey.depression_score < 8 %>
+				<h4 class="">Votre score "Dépression" est de <%=@survey.depression_score%> : absence de symptomatologie.</h4>
+			<% else @survey.depression_score > 10 %>
+				<h4 class="">Votre score "Dépression" est de <%=@survey.depression_score%> : symptomatologie douteuse.</h4>
+			<% end %>
+			<br>
 
-			<h4 class="">Votre score "Dépression" est de <%=@survey.depression_score%>.</h4>
+			<% if @survey.anxiety_score > 10 %>
+				<h4 class="">Votre score "Anxiété" est de <%=@survey.anxiety_score%> : symptomatologie certaine.</h4>
+			<% elsif @survey.anxiety_score < 8 %>
+				<h4 class="">Votre score "Anxiété" est de <%=@survey.anxiety_score%> : absence de symptomatologie.</h4>
+			<% else @survey.anxiety_score > 10 %>
+				<h4 class="">Votre score "Anxiété" est de <%=@survey.anxiety_score%> : symptomatologie douteuse.</h4>
+			<% end %>
 			<br>
-			<h4 class="">Votre score "Anxiété" est de <%=@survey.anxiety_score%>.</h4>
-			<br>
+			
 			<h4 class="">Votre score "Addiction" est de <%=@survey.addiction_score%>.</h4>
 			<br>
-			<h4 class="">Votre score "Rsiques de violences conjugales" est de <%=@survey.abuse_score%>.</h4>
+			<h4 class="">Votre score "Risques de violences conjugales" est de <%=@survey.abuse_score%>.</h4>
+			<br>
+
+
+			<% if @survey.abuse_score > 2 %>
+				<p>
+					Toutes les violences conjugales sont interdites par la loi, qu'elles touchent un homme ou une femme, qu'elles soient physiques, psychologiques ou sexuelles. Il s'agit des violences commises au sein des couples mariés, pacsés ou en union libre. La victime de violences conjugales qui signale les faits peut bénéficier de nombreuses mesures de protection de la part des institutions publiques et des associations. Ces mesures peuvent même s'étendre aux enfants.
+					Vous trouverez <a href="https://stop-violences-femmes.gouv.fr/Les-numeros-d-urgence,396.html">ici</a> les numéros d’urgences <a href="https://stop-violences-femmes.gouv.fr/Les-numeros-d-ecoute-d,399.html">ici</a>les numéros  d’écoute, d’information et d’orientation.
+				</p>
+			<% end %>
+			<br>
+
+			<% if @survey.depression_score > 8 || @survey.anxiety_score > 8 %>
+				<p>
+					<strong>En cas d'urgence contactez le 15.</strong><br><br>
+					Voici les centres d'écoute que vous pourez retrouver sur :<br>
+					http://www.psycom.org/Lignes-d-ecoute<br>
+					https://www.metacoaching.pro/fr<br>
+					https://www.qare.fr/<br>
+					Croix-rouge : 09 70 28 30 00* ouvert 7j/7 de 8h à 20h.<br><br>
+ 
+					Ainsi que des solutions de suivi psychologique en ligne.<br> 
+					Les centres médico-psychologiques (CMP) sont des établissements regroupant des spécialistes proposant des soins en santé mentale. Ces centres ont pour fonctions la prévention, le diagnostic, les soins ambulatoires et les interventions à domicile en fonction des besoins en santé mentale. La prise en charge est remboursée par la sécurité sociale.<br>
+					Il est possible de de prendre contact avec le CMP de votre secteur, pour demander un entretien en vue d’un éventuel suivi. Les entretiens sont souvent longs à obtenir en raison d’une demande forte. 
+				</p>
+			<% end %>
 			<br>
 			<br>
 			<h4>Les C.M.P. près de chez vous :</h4>
