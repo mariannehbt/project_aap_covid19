@@ -35,19 +35,44 @@
 	<section class="parallax_window_in" data-parallax="scroll" data-image-src=<%= image_path("grad-banner-bg.png")%> data-natural-width="1400" data-natural-height="800">
 		<div id="sub_content_in">
 			<h1>Evapsy Questionnaire</h1>
-			<p>"Faites le test pour répondre en citoyen éclairé selon vos symptômes."</p>
-			<%= link_to 'Démarrer le test', new_survey_path, class: "btn_1 rounded" %>
+			<p>Répondre à ces questions vous permettra d’évaluer votre santé psychique actuelle.
+				 Le remplir régulièrement vous permettra de suivre vous-même l’évolution de votre santé.
+				 Des conseils adaptés à vos besoins vous seront alors adressés.</p>
+			<%= link_to 'Démarrer le questionnaire', new_survey_path, class: "btn_1 rounded" %>
 		</div>
 	</section>
 	<!-- /section -->
 	<main id="general_page">
+	
+		<div class="container_styled_1">
+			<div class="container margin_60_35">
+				<div class="row">
+					<div class="col-lg-6">
+						<h2 class="nomargin_top"><br>Un questionnaire Simple</h2>
+						<p>
+							De nombreuses études effectuées à la suite de diverses épidémies, montrent que les mises en quarantaine peuvent avoir des conséquences délétères sur les populations concernées.
+							On relève notamment des conséquences psychologiques et psychiatriques, parfois sévères, pouvant survenir dans les quatre à six mois qui suivent les phases de confinement. C’est pourquoi nous proposons ici une solution de suivi autonome via questionnaire.<br><br>
+							Ce questionnaire est divisé en trois étapes, et concerne les niveaux d’anxiété/dépression, les problématiques d’addiction, ainsi que la prévention des violences conjugales.<br> 
+							Vous avez le choix du nombre et de la fréquence de remplissage des questionnaires. L’objectif est de les compléter régulièrement (par exemple une fois par mois pendant 6 mois) pour avoir un suivi le plus fiable possible.
+							Remplir ces questionnaires régulièrement vous permettra de voir l’évolution de vos symptômes dans le temps, et d’avoir ainsi un repère sur l’évolution de votre santé psychique.<br><br>   
+							La passation dure entre 5 et 15 minutes.
+							Les résultats sont une aide au suivi de votre santé mentale, ils demeurent toutefois subjectifs et ne constituent en aucun cas un diagnostique. <strong>Cette solution ne se substitue pas à un suivi par des professionnels de santé</strong> (médecin, psychiatre, psychologue). 
+						</p>	
+					</div>
+					<div class="col-lg-5 ml-lg-4 add_top_30">
+						<%= image_tag 'corona-img.png', class: "img-fluid" %>
+					</div>
+				</div>
+				<!-- End row -->
+			</div>
+		</div>
+		
+		<!-- End container -->
+		
 		<section class="bg-white add_bottom_60">
 			<div class="container margin_60 ">
 				<div class="main_title">
-					<h2><em></em>Corona les bonnes Manieres</h2>
-					<p>
-						Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos.
-					</p>
+					<h2><em></em>Covid19 : les gestes préventifs</h2>
 				</div>
 			</div>
 			<div class="container">
@@ -71,34 +96,12 @@
 			</div>
 		</section>
 
-	
-		<div class="container_styled_1">
-			<div class="container margin_60_35">
-				<div class="row">
-					<div class="col-lg-6">
-						<h2 class="nomargin_top"><br>Un questionnaire Simple</h2>
-						<p class="lead">Ex graeco nostrud theophrastus nam, cum tibique reprimique ad. Mea omittam electram te.</p>
-						<p>
-							Ex has nihil liberavisse philosophia. Ne mazim quidam contentiones usu. Id nec <strong>causae periculis </strong>evertitur, stet menandri an pro, his argumentum appellantur eu. An laudem efficiendi has, utinam principes consequat id vel.</p>
-						<p>Ex graeco nostrud theophrastus nam, cum tibique reprimique ad. Mea omittam electram te, eu cum fastidii sapientem delicatissimi. Sed cu eripuit veritus propriae. An eam choro saperet ullamcorper, eam <strong>saperet rationibus</strong> ut. Cu usu tation quaeque vocibus, alterum torquatos persequeris te ius.</p>
-					</div>
-					<div class="col-lg-5 ml-lg-5 add_top_30">
-						<%= image_tag 'corona-img.png', class: "img-fluid" %>
-					</div>
-				</div>
-				<!-- End row -->
-			</div>
-		</div>
-		
-		<!-- End container -->
-		
 	</main>
 	
 	<footer class="clearfix">
 		<div class="container">
 			<p>© 2020 Evapsy</p>
 			<ul>
-				<li><%= image_tag 'https://www.gouvernement.fr/sites/default/files/01_marianne-615x206_3.gif', class: "img-fluid rounded-20", width: "80px", height: "50px" %></li>
 				<li><a href="#0" class="animated_link">Condition Générale</a></li>
 				<li><a href="#0" class="animated_link">Contacts</a></li>
 			</ul>
